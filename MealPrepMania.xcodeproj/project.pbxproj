@@ -1,0 +1,312 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CB1622AD1DDAA31A0001D80F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1622AC1DDAA31A0001D80F /* AppDelegate.swift */; };
+		CB1622AF1DDAA31A0001D80F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1622AE1DDAA31A0001D80F /* ViewController.swift */; };
+		CB1622B21DDAA31A0001D80F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB1622B01DDAA31A0001D80F /* Main.storyboard */; };
+		CB1622B51DDAA31A0001D80F /* MealPrepMania.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CB1622B31DDAA31A0001D80F /* MealPrepMania.xcdatamodeld */; };
+		CB1622B71DDAA31A0001D80F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB1622B61DDAA31A0001D80F /* Assets.xcassets */; };
+		CB1622BA1DDAA31A0001D80F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB1622B81DDAA31A0001D80F /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CB1622A91DDAA31A0001D80F /* MealPrepMania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MealPrepMania.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB1622AC1DDAA31A0001D80F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CB1622AE1DDAA31A0001D80F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CB1622B11DDAA31A0001D80F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CB1622B41DDAA31A0001D80F /* MealPrepMania.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MealPrepMania.xcdatamodel; sourceTree = "<group>"; };
+		CB1622B61DDAA31A0001D80F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CB1622B91DDAA31A0001D80F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CB1622BB1DDAA31A0001D80F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CB1622A61DDAA31A0001D80F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CB1622A01DDAA31A0001D80F = {
+			isa = PBXGroup;
+			children = (
+				CB1622AB1DDAA31A0001D80F /* MealPrepMania */,
+				CB1622AA1DDAA31A0001D80F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CB1622AA1DDAA31A0001D80F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CB1622A91DDAA31A0001D80F /* MealPrepMania.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CB1622AB1DDAA31A0001D80F /* MealPrepMania */ = {
+			isa = PBXGroup;
+			children = (
+				CB1622AC1DDAA31A0001D80F /* AppDelegate.swift */,
+				CB1622AE1DDAA31A0001D80F /* ViewController.swift */,
+				CB1622B01DDAA31A0001D80F /* Main.storyboard */,
+				CB1622B61DDAA31A0001D80F /* Assets.xcassets */,
+				CB1622B81DDAA31A0001D80F /* LaunchScreen.storyboard */,
+				CB1622BB1DDAA31A0001D80F /* Info.plist */,
+				CB1622B31DDAA31A0001D80F /* MealPrepMania.xcdatamodeld */,
+			);
+			path = MealPrepMania;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CB1622A81DDAA31A0001D80F /* MealPrepMania */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB1622BE1DDAA31A0001D80F /* Build configuration list for PBXNativeTarget "MealPrepMania" */;
+			buildPhases = (
+				CB1622A51DDAA31A0001D80F /* Sources */,
+				CB1622A61DDAA31A0001D80F /* Frameworks */,
+				CB1622A71DDAA31A0001D80F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MealPrepMania;
+			productName = MealPrepMania;
+			productReference = CB1622A91DDAA31A0001D80F /* MealPrepMania.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CB1622A11DDAA31A0001D80F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Jennifer Foster";
+				TargetAttributes = {
+					CB1622A81DDAA31A0001D80F = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = CB1622A41DDAA31A0001D80F /* Build configuration list for PBXProject "MealPrepMania" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CB1622A01DDAA31A0001D80F;
+			productRefGroup = CB1622AA1DDAA31A0001D80F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CB1622A81DDAA31A0001D80F /* MealPrepMania */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CB1622A71DDAA31A0001D80F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB1622BA1DDAA31A0001D80F /* LaunchScreen.storyboard in Resources */,
+				CB1622B71DDAA31A0001D80F /* Assets.xcassets in Resources */,
+				CB1622B21DDAA31A0001D80F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CB1622A51DDAA31A0001D80F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB1622AF1DDAA31A0001D80F /* ViewController.swift in Sources */,
+				CB1622AD1DDAA31A0001D80F /* AppDelegate.swift in Sources */,
+				CB1622B51DDAA31A0001D80F /* MealPrepMania.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CB1622B01DDAA31A0001D80F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB1622B11DDAA31A0001D80F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CB1622B81DDAA31A0001D80F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB1622B91DDAA31A0001D80F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CB1622BC1DDAA31A0001D80F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CB1622BD1DDAA31A0001D80F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CB1622BF1DDAA31A0001D80F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MealPrepMania/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.oc.eagles.MealPrepMania;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CB1622C01DDAA31A0001D80F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MealPrepMania/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.oc.eagles.MealPrepMania;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CB1622A41DDAA31A0001D80F /* Build configuration list for PBXProject "MealPrepMania" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB1622BC1DDAA31A0001D80F /* Debug */,
+				CB1622BD1DDAA31A0001D80F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CB1622BE1DDAA31A0001D80F /* Build configuration list for PBXNativeTarget "MealPrepMania" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB1622BF1DDAA31A0001D80F /* Debug */,
+				CB1622C01DDAA31A0001D80F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CB1622B31DDAA31A0001D80F /* MealPrepMania.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CB1622B41DDAA31A0001D80F /* MealPrepMania.xcdatamodel */,
+			);
+			currentVersion = CB1622B41DDAA31A0001D80F /* MealPrepMania.xcdatamodel */;
+			path = MealPrepMania.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = CB1622A11DDAA31A0001D80F /* Project object */;
+}
