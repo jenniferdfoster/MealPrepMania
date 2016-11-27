@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let rootViewController = window!.rootViewController as! UITabBarController
-        let recipesViewController = rootViewController.viewControllers![0] as! RecipesTableViewController
+        let navController = rootViewController.viewControllers![0] as! UINavigationController
+        let recipesViewController = navController.topViewController as! RecipesTableViewController
         recipesViewController.mealPrepManiaAPI = MealPrepManiaAPI()
         return true
     }

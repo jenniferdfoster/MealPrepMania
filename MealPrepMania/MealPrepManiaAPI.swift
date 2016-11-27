@@ -9,7 +9,7 @@
 import Foundation
 
 class MealPrepManiaAPI {
-    private let baseURLString = "https://django-workspace-taylorfoster.c9users.io/foody/"
+    private let baseURLString = "https://django-workspace-taylorfoster.c9users.io/snippets/?format=json"
     
     let session: NSURLSession = {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
