@@ -9,12 +9,12 @@
 import Foundation
 
 class Recipe {
-    var id: String
+    var id: Int
     var title: String
     var directions: [Direction]
     var ingredients: [Ingredient]
     
-    init(id: String, title: String) {
+    init(id: Int, title: String) {
         self.id = id
         self.title = title
         self.directions = [Direction]()

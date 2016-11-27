@@ -64,6 +64,16 @@
                                 <action selector="addToMenu:" destination="6n8-IM-a1e" eventType="touchUpInside" id="2NT-Aj-KJu"/>
                             </connections>
                         </button>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="trE-tZ-2Al">
+                            <rect key="frame" x="0.0" y="263.5" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Delete Recipe">
+                                <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="deleteRecipe:" destination="6n8-IM-a1e" eventType="touchUpInside" id="5br-hk-8hy"/>
+                            </connections>
+                        </button>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" id="IMT-vJ-y3w" customClass="IngredientCell" customModule="MealPrepMania">
                                 <rect key="frame" x="0.0" y="157.5" width="600" height="44"/>
@@ -189,19 +199,57 @@
         <!--Grocery List-->
         <scene sceneID="ZWm-Bf-W2s">
             <objects>
-                <tableViewController id="Sld-GU-SUb" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="317-Os-Qoq">
+                <tableViewController id="Sld-GU-SUb" customClass="GroceryListViewController" customModule="MealPrepMania" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="317-Os-Qoq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JeK-a3-mB4">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="GroceryListItemCell" id="JeK-a3-mB4" customClass="IngredientCell" customModule="MealPrepMania" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="49.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JeK-a3-mB4" id="sdg-M4-Wyr">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="561" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJI-nA-XfO">
+                                            <rect key="frame" x="8" y="13" width="8.5" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="cups" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9T8-sK-BeM">
+                                            <rect key="frame" x="24" y="13" width="31.5" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sugar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fG-l4-diE">
+                                            <rect key="frame" x="63" y="13" width="36.5" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="5fG-l4-diE" secondAttribute="bottom" constant="5.5" id="0H4-I8-Pep"/>
+                                        <constraint firstItem="uJI-nA-XfO" firstAttribute="top" secondItem="sdg-M4-Wyr" secondAttribute="topMargin" constant="5" id="0LW-V5-qE8"/>
+                                        <constraint firstItem="uJI-nA-XfO" firstAttribute="leading" secondItem="sdg-M4-Wyr" secondAttribute="leadingMargin" id="350-0h-YBr"/>
+                                        <constraint firstItem="9T8-sK-BeM" firstAttribute="leading" secondItem="uJI-nA-XfO" secondAttribute="trailing" constant="8" id="Dar-bp-Y6L"/>
+                                        <constraint firstItem="5fG-l4-diE" firstAttribute="leading" secondItem="9T8-sK-BeM" secondAttribute="trailing" constant="7.5" id="MwV-TF-t2w"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="uJI-nA-XfO" secondAttribute="bottom" constant="5.5" id="eHo-oR-w4y"/>
+                                        <constraint firstItem="9T8-sK-BeM" firstAttribute="leading" secondItem="uJI-nA-XfO" secondAttribute="trailing" constant="7.5" id="eOQ-yF-9DJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="9T8-sK-BeM" secondAttribute="bottom" constant="5.5" id="gSV-Ab-d9D"/>
+                                        <constraint firstItem="5fG-l4-diE" firstAttribute="leading" secondItem="9T8-sK-BeM" secondAttribute="trailing" constant="8" id="wm1-SQ-jpJ"/>
+                                        <constraint firstItem="5fG-l4-diE" firstAttribute="top" secondItem="sdg-M4-Wyr" secondAttribute="topMargin" constant="5" id="wzc-ri-TW8"/>
+                                        <constraint firstItem="9T8-sK-BeM" firstAttribute="top" secondItem="sdg-M4-Wyr" secondAttribute="topMargin" constant="5" id="zG2-f3-OSz"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="measurementLabel" destination="9T8-sK-BeM" id="m79-rG-h7Z"/>
+                                    <outlet property="nameLabel" destination="5fG-l4-diE" id="f86-5J-sNF"/>
+                                    <outlet property="quantityLabel" destination="uJI-nA-XfO" id="tfI-rq-b7h"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

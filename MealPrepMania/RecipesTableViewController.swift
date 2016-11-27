@@ -18,7 +18,7 @@ class RecipesTableViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         // Get all Recipes for the user
         
-        let r = Recipe(id: "1", title: "Tasty Cakes")
+        let r = Recipe(id: 1, title: "Tasty Cakes")
         let ing = Ingredient(name: "cake", measurement: "tons", quantity: 3.0)
         r.ingredients.append(ing)
         let dir = Direction(id: "1", text: "Make Tasty Cakes")
@@ -26,7 +26,7 @@ class RecipesTableViewController: UITableViewController {
         r.directions.append(dir)
         r.directions.append(dir2)
         
-        let r2 = Recipe(id: "2", title: "Jelly Beans")
+        let r2 = Recipe(id: 2, title: "Jelly Beans")
         let ing10 = Ingredient(name: "jelly", measurement: "jar", quantity: 1.0)
         let ing11 = Ingredient(name: "beans", measurement: "bag", quantity: 2.0)
         r2.ingredients.append(ing10)

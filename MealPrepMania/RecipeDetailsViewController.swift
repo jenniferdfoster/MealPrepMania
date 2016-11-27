@@ -11,7 +11,7 @@ import UIKit
 class RecipeDetailsViewController: UITableViewController {
     
     var mealPrepManiaAPI: MealPrepManiaAPI!
-    var recipe: Recipe = Recipe(id: "1", title: "boo")
+    var recipe: Recipe = Recipe(id: 1, title: "boo")
     var myTextField: UITextField = UITextField()
     
     override func viewDidLoad() {
@@ -96,6 +96,10 @@ class RecipeDetailsViewController: UITableViewController {
 
         ac.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         presentViewController(ac, animated: true, completion: nil)
+    }
+    
+    @IBAction func deleteRecipe(sender: AnyObject) {
+        mealPrepManiaAPI.deleteRecipe(self.recipe.id)
     }
     
     func dateSelected(datePicker:UIDatePicker)
