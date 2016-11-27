@@ -8,22 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		CB1622AD1DDAA31A0001D80F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1622AC1DDAA31A0001D80F /* AppDelegate.swift */; };
-		CB1622AF1DDAA31A0001D80F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1622AE1DDAA31A0001D80F /* ViewController.swift */; };
 		CB1622B21DDAA31A0001D80F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB1622B01DDAA31A0001D80F /* Main.storyboard */; };
 		CB1622B51DDAA31A0001D80F /* MealPrepMania.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CB1622B31DDAA31A0001D80F /* MealPrepMania.xcdatamodeld */; };
 		CB1622B71DDAA31A0001D80F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB1622B61DDAA31A0001D80F /* Assets.xcassets */; };
 		CB1622BA1DDAA31A0001D80F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB1622B81DDAA31A0001D80F /* LaunchScreen.storyboard */; };
+		CB3AE4531DEB625900A7A618 /* RecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4521DEB625900A7A618 /* RecipesTableViewController.swift */; };
+		CB3AE4551DEB627200A7A618 /* MealPrepManiaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4541DEB627200A7A618 /* MealPrepManiaAPI.swift */; };
+		CB3AE4571DEB637900A7A618 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4561DEB637900A7A618 /* Recipe.swift */; };
+		CB3AE4591DEB644700A7A618 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4581DEB644700A7A618 /* Direction.swift */; };
+		CB3AE45B1DEB64C100A7A618 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE45A1DEB64C100A7A618 /* Ingredient.swift */; };
+		CB3AE45D1DEB655E00A7A618 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE45C1DEB655E00A7A618 /* MenuItem.swift */; };
+		CB3AE45F1DEB65BB00A7A618 /* GroceryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE45E1DEB65BB00A7A618 /* GroceryListItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CB1622A91DDAA31A0001D80F /* MealPrepMania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MealPrepMania.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB1622AC1DDAA31A0001D80F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CB1622AE1DDAA31A0001D80F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CB1622B11DDAA31A0001D80F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CB1622B41DDAA31A0001D80F /* MealPrepMania.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MealPrepMania.xcdatamodel; sourceTree = "<group>"; };
 		CB1622B61DDAA31A0001D80F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB1622B91DDAA31A0001D80F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB1622BB1DDAA31A0001D80F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB3AE4521DEB625900A7A618 /* RecipesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesTableViewController.swift; sourceTree = "<group>"; };
+		CB3AE4541DEB627200A7A618 /* MealPrepManiaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPrepManiaAPI.swift; sourceTree = "<group>"; };
+		CB3AE4561DEB637900A7A618 /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		CB3AE4581DEB644700A7A618 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		CB3AE45A1DEB64C100A7A618 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		CB3AE45C1DEB655E00A7A618 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		CB3AE45E1DEB65BB00A7A618 /* GroceryListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +69,15 @@
 			isa = PBXGroup;
 			children = (
 				CB1622AC1DDAA31A0001D80F /* AppDelegate.swift */,
-				CB1622AE1DDAA31A0001D80F /* ViewController.swift */,
 				CB1622B01DDAA31A0001D80F /* Main.storyboard */,
+				CB3AE4521DEB625900A7A618 /* RecipesTableViewController.swift */,
+				CB3AE4541DEB627200A7A618 /* MealPrepManiaAPI.swift */,
 				CB1622B61DDAA31A0001D80F /* Assets.xcassets */,
+				CB3AE4561DEB637900A7A618 /* Recipe.swift */,
+				CB3AE45A1DEB64C100A7A618 /* Ingredient.swift */,
+				CB3AE45C1DEB655E00A7A618 /* MenuItem.swift */,
+				CB3AE45E1DEB65BB00A7A618 /* GroceryListItem.swift */,
+				CB3AE4581DEB644700A7A618 /* Direction.swift */,
 				CB1622B81DDAA31A0001D80F /* LaunchScreen.storyboard */,
 				CB1622BB1DDAA31A0001D80F /* Info.plist */,
 				CB1622B31DDAA31A0001D80F /* MealPrepMania.xcdatamodeld */,
@@ -138,9 +156,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB1622AF1DDAA31A0001D80F /* ViewController.swift in Sources */,
 				CB1622AD1DDAA31A0001D80F /* AppDelegate.swift in Sources */,
+				CB3AE4531DEB625900A7A618 /* RecipesTableViewController.swift in Sources */,
+				CB3AE45B1DEB64C100A7A618 /* Ingredient.swift in Sources */,
 				CB1622B51DDAA31A0001D80F /* MealPrepMania.xcdatamodeld in Sources */,
+				CB3AE4551DEB627200A7A618 /* MealPrepManiaAPI.swift in Sources */,
+				CB3AE45D1DEB655E00A7A618 /* MenuItem.swift in Sources */,
+				CB3AE4571DEB637900A7A618 /* Recipe.swift in Sources */,
+				CB3AE45F1DEB65BB00A7A618 /* GroceryListItem.swift in Sources */,
+				CB3AE4591DEB644700A7A618 /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +316,7 @@
 				CB1622C01DDAA31A0001D80F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
