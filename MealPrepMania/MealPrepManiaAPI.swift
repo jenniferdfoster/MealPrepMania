@@ -34,8 +34,12 @@ class MealPrepManiaAPI {
             return nil
         }
         do {
-            let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
             
+            let feedStr = String.init(data: jsonData, encoding: NSUTF8StringEncoding)
+            print(feedStr?.characters)
+            
+            let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
+            print("jsonObject: \(jsonObject)")
             guard let
                 jsonDictionary = jsonObject as? [[NSObject:AnyObject]]
                 else {
@@ -44,15 +48,15 @@ class MealPrepManiaAPI {
             
             var recipes = [Recipe]()
             for recipeDictionary in jsonDictionary {
-                recipes.append(Recipe(id: (recipeDictionary["id"] as? String)!, name: (recipeDictionary["name"] as? String)!))
+                recipes.append(Recipe(id: (recipeDictionary["id"] as? String)!, title: (recipeDictionary["title"] as? String)!))
             }
+            print("Doing stuff")
+            print(recipes)
             return recipes
         }
         catch let error {
             print(error)
             return nil
         }
-        
     }
-
 }
