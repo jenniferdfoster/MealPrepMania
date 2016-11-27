@@ -21,6 +21,7 @@
 		CB3AE4621DEB72A200A7A618 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4611DEB72A200A7A618 /* RecipeDetailsViewController.swift */; };
 		CB3AE4681DEB786200A7A618 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB3AE4671DEB786200A7A618 /* Main.storyboard */; };
 		CB3AE46A1DEB7C2A00A7A618 /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4691DEB7C2A00A7A618 /* IngredientCell.swift */; };
+		CB3AE46C1DEB8BF600A7A618 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE46B1DEB8BF600A7A618 /* MenuTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		CB3AE4611DEB72A200A7A618 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
 		CB3AE4671DEB786200A7A618 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CB3AE4691DEB7C2A00A7A618 /* IngredientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
+		CB3AE46B1DEB8BF600A7A618 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				CB3AE4691DEB7C2A00A7A618 /* IngredientCell.swift */,
 				CB3AE4611DEB72A200A7A618 /* RecipeDetailsViewController.swift */,
 				CB3AE4521DEB625900A7A618 /* RecipesTableViewController.swift */,
+				CB3AE46B1DEB8BF600A7A618 /* MenuTableViewController.swift */,
 				CB1622B61DDAA31A0001D80F /* Assets.xcassets */,
 				CB1622B81DDAA31A0001D80F /* LaunchScreen.storyboard */,
 				CB1622BB1DDAA31A0001D80F /* Info.plist */,
@@ -178,6 +181,7 @@
 				CB3AE4551DEB627200A7A618 /* MealPrepManiaAPI.swift in Sources */,
 				CB3AE46A1DEB7C2A00A7A618 /* IngredientCell.swift in Sources */,
 				CB3AE45D1DEB655E00A7A618 /* MenuItem.swift in Sources */,
+				CB3AE46C1DEB8BF600A7A618 /* MenuTableViewController.swift in Sources */,
 				CB3AE4571DEB637900A7A618 /* Recipe.swift in Sources */,
 				CB3AE45F1DEB65BB00A7A618 /* GroceryListItem.swift in Sources */,
 				CB3AE4591DEB644700A7A618 /* Direction.swift in Sources */,

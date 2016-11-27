@@ -40,7 +40,6 @@ class RecipesTableViewController: UITableViewController {
         r2.directions.append(dir12)
         r2.directions.append(dir13)
         
-        
         recipes.append(r)
         recipes.append(r2)
         self.tableView.reloadData()

@@ -12,6 +12,7 @@ class RecipeDetailsViewController: UITableViewController {
     
     var mealPrepManiaAPI: MealPrepManiaAPI!
     var recipe: Recipe = Recipe(id: "1", title: "boo")
+    var myTextField: UITextField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,5 +64,45 @@ class RecipeDetailsViewController: UITableViewController {
             cell.textLabel!.text = ""
             return cell
         }
+    }
+    
+    @IBAction func addToMenu(sender: AnyObject) {
+        let datePicker = UIDatePicker()
+
+        let ac = UIAlertController(title: "What Day?", message: nil, preferredStyle: .Alert)
+        ac.addTextFieldWithConfigurationHandler({
+            (textField) -> Void in
+            datePicker.datePickerMode = .Date
+            datePicker.addTarget(self, action: #selector(RecipeDetailsViewController.dateSelected(_:)), forControlEvents: UIControlEvents.ValueChanged)
+            datePicker.date = NSDate()
+            self.myTextField = textField
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = .MediumStyle
+            self.myTextField.text = dateFormatter.stringFromDate(datePicker.date)
+            textField.inputView = datePicker
+        })
+        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: {
+            alert -> Void in
+            // Add recipe to menu on specified date
+            let mi = MenuItem(recipe: self.recipe, date: datePicker.date)
+            //TODO: Save Menu Item to backend
+            print("Created Menu Item on \(mi.date)")
+            // Add ingredients to grocery list
+            for ingredient in self.recipe.ingredients {
+                let gi = GroceryListItem(ingredient: ingredient, isPurchased: false)
+                print ("Added grocery list item \(gi.ingredient.name)")
+            }
+        }))
+
+        ac.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        presentViewController(ac, animated: true, completion: nil)
+    }
+    
+    func dateSelected(datePicker:UIDatePicker)
+    {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .MediumStyle
+        let date = datePicker.date
+        myTextField.text = dateFormatter.stringFromDate(date)
     }
 }
