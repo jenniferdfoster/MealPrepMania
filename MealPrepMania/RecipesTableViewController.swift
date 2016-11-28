@@ -44,11 +44,11 @@ class RecipesTableViewController: UITableViewController {
         recipes.append(r2)
         self.tableView.reloadData()
         
-        mealPrepManiaAPI.fetchAllRecipes{
-            (allRecipes)->Void in
-            self.recipes = allRecipes
-            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
-        }
+//        mealPrepManiaAPI.fetchAllRecipes{
+//            (allRecipes)->Void in
+//            self.recipes = allRecipes
+//            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
+//        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,7 +63,6 @@ class RecipesTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //If the triggered segue is the "ShowRecipe" segue
         if segue.identifier == "ShowRecipe" {
             //Figure out which row was just tapped
             if let row = tableView.indexPathForSelectedRow?.row {
@@ -74,5 +73,11 @@ class RecipesTableViewController: UITableViewController {
                 detailsViewController.mealPrepManiaAPI = mealPrepManiaAPI
             }
         }
+        
+        if segue.identifier == "NewRecipe" {
+            let detailsViewController = segue.destinationViewController as! RecipeDetailsViewController
+            detailsViewController.mealPrepManiaAPI = mealPrepManiaAPI
+        }
+
     }
 }

@@ -10,7 +10,11 @@ import UIKit
 
 class IngredientCell: UITableViewCell {
     
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var measurementLabel: UILabel!
-    @IBOutlet var quantityLabel: UILabel!
+//    @IBOutlet var nameLabel: UILabel!
+//    @IBOutlet var measurementLabel: UILabel!
+//    @IBOutlet var quantityLabel: UILabel!
+    
+    @IBOutlet var quantityTextField: UITextField!
+    @IBOutlet var measurementTextField: UITextField!
+    @IBOutlet var nameTextField: UITextField!
 }

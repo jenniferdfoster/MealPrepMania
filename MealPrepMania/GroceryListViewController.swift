@@ -77,9 +77,9 @@ class GroceryListViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("GroceryListItemCell", forIndexPath: indexPath) as! IngredientCell
         let groceryItem = self.groceryList[indexPath.row]
-        cell.nameLabel.text = groceryItem.ingredient.name
-        cell.measurementLabel.text = groceryItem.ingredient.measurement
-        cell.quantityLabel.text = groceryItem.ingredient.quantity.description
+        cell.nameTextField.text = groceryItem.ingredient.name
+        cell.measurementTextField.text = groceryItem.ingredient.measurement
+        cell.quantityTextField.text = groceryItem.ingredient.quantity.description
         if groceryItem.isPurchased {
             cell.accessoryType = .Checkmark
         }
