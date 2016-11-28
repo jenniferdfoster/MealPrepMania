@@ -9,10 +9,12 @@
 import Foundation
 
 class MenuItem {
+    var id: Int
     var recipe: Recipe
     var date: NSDate
     
-    init(recipe: Recipe, date: NSDate) {
+    init(id: Int, recipe: Recipe, date: NSDate) {
+        self.id = id
         self.recipe = recipe
         self.date = date
     }

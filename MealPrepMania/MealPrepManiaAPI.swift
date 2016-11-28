@@ -9,7 +9,7 @@
 import Foundation
 
 class MealPrepManiaAPI {
-    private let baseURLString = "https://django-workspace-taylorfoster.c9users.io/snippets"
+    private let baseURLString = "https://django-workspace-taylorfoster.c9users.io"
     
     let session: NSURLSession = {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -17,7 +17,7 @@ class MealPrepManiaAPI {
     }()
     
     func fetchAllRecipes(completion completion: ([Recipe]) -> Void) {
-        let url = NSURL(string: "\(baseURLString)")!
+        let url = NSURL(string: "\(baseURLString)/snippets/")!
         let request = NSURLRequest(URL: url)
         let task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
@@ -59,8 +59,74 @@ class MealPrepManiaAPI {
         }
     }
     
+    func addRecipe(completion: (Recipe) -> Void) {
+        if let newTitle = ("New Recipe").stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()){
+            let url = NSURL(string: "\(baseURLString)/snippets?title=\(newTitle)")!
+            let request = NSMutableURLRequest(URL: url)
+            request.HTTPMethod = "POST"
+            let task = session.dataTaskWithRequest(request) {
+                (data, response, error) -> Void in
+                
+                if let recipe = self.processAddRecipeRequest(data: data, error: error) {
+                    completion(recipe)
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    func processAddRecipeRequest(data data: NSData?, error: NSError?) -> Recipe? {
+        guard let jsonData = data else {
+            return nil
+        }
+        do {
+            let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
+            
+            guard let
+                jsonDictionary = jsonObject as? [NSObject:AnyObject]
+                else {
+                    return nil
+            }
+            let recipe = Recipe(id: (jsonDictionary["id"] as? Int)!, title: (jsonDictionary["title"] as? String)!)
+            return recipe
+        }
+        catch let error {
+            print(error)
+            return nil
+        }
+    }
+
+    
     func deleteRecipe(id: Int) {
-        let url = NSURL(string: "\(baseURLString)/\(id)")!
+        let url = NSURL(string: "\(baseURLString)/snippets/\(id)")!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "DELETE"
+        let task = session.dataTaskWithRequest(request) {
+            (data, response, error) -> Void in
+            guard data != nil else {
+                print("Error: did not receive data")
+                return
+            }
+        }
+        task.resume()
+    }
+    
+    func deleteGroceryItem(id: Int) {
+        let url = NSURL(string: "\(baseURLString)/groceryList/\(id)")!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "DELETE"
+        let task = session.dataTaskWithRequest(request) {
+            (data, response, error) -> Void in
+            guard data != nil else {
+                print("Error: did not receive data")
+                return
+            }
+        }
+        task.resume()
+    }
+    
+    func deleteMenuItem(id: Int) {
+        let url = NSURL(string: "\(baseURLString)/menu/\(id)")!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "DELETE"
         let task = session.dataTaskWithRequest(request) {

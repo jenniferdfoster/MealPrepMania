@@ -13,10 +13,12 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
     var mealPrepManiaAPI: MealPrepManiaAPI!
     var recipe: Recipe = Recipe(id: 1, title: "boo")
     var myTextField: UITextField = UITextField()
+    @IBOutlet var recipeTitleTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = recipe.title
+        self.title = "Edit Recipe"
+        self.recipeTitleTextField.text = self.recipe.title
         self.tableView.estimatedRowHeight = 80
         self.tableView.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view, typically from a nib.
@@ -53,9 +55,7 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         case 0:
             let ingredient = recipe.ingredients[indexPath.row]
             let cell: IngredientCell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
-            //cell.nameLabel.text = ingredient.name
-            //cell.measurementLabel.text = ingredient.measurement
-            //cell.quantityLabel.text = ingredient.quantity.description
+
             cell.quantityTextField.text = ingredient.quantity.description
             cell.quantityTextField.tag = (indexPath.row * 10) + 1
             cell.quantityTextField.keyboardType = .DecimalPad
@@ -109,20 +109,19 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: {
             alert -> Void in
             // Add recipe to menu on specified date
-            let mi = MenuItem(recipe: self.recipe, date: datePicker.date)
+            let mi = MenuItem(id: 3, recipe: self.recipe, date: datePicker.date)
             //TODO: Save Menu Item to backend
             print("Created Menu Item on \(mi.date)")
             // Add ingredients to grocery list
             for ingredient in self.recipe.ingredients {
-                let gi = GroceryListItem(ingredient: ingredient, isPurchased: false)
-                print ("Added grocery list item \(gi.ingredient.name)")
+                let gi = GroceryListItem(id:4, name: ingredient.name, measurement: ingredient.measurement, quantity: ingredient.quantity, isPurchased: false)
+                print ("Added grocery list item \(gi.name)")
             }
         }))
 
         ac.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         presentViewController(ac, animated: true, completion: nil)
     }
-    
     
     func updateDirection(direction: Direction) {
         
@@ -174,6 +173,10 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
+        // Title
+        if textField.isEqual(self.recipeTitleTextField) {
+            self.recipe.title = textField.text!
+        }
         // Ingredients
         if textField.tag < 1000 {
             let ingredient = self.recipe.ingredients[textField.tag / 10]

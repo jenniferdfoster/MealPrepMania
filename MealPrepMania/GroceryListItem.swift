@@ -9,11 +9,17 @@
 import Foundation
 
 class GroceryListItem {
-    var ingredient: Ingredient
+    var id: Int
+    var name: String
+    var measurement: String
+    var quantity: Float
     var isPurchased: Bool
     
-    init(ingredient: Ingredient, isPurchased: Bool) {
-        self.ingredient = ingredient
+    init(id: Int, name: String, measurement: String, quantity: Float, isPurchased: Bool) {
+        self.id = id
+        self.name = name
+        self.measurement = measurement
+        self.quantity = quantity
         self.isPurchased = isPurchased
     }
 }

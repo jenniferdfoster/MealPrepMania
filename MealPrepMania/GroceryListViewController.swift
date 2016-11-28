@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroceryListViewController: UITableViewController {
+class GroceryListViewController: UITableViewController, UITextFieldDelegate {
     
     var mealPrepManiaAPI: MealPrepManiaAPI!
     var groceryList: [GroceryListItem] = [GroceryListItem]()
@@ -40,11 +40,11 @@ class GroceryListViewController: UITableViewController {
         r2.directions.append(dir13)
     
         for i in r.ingredients {
-            groceryList.append(GroceryListItem(ingredient: i, isPurchased: false))
+            groceryList.append(GroceryListItem(id: 1, name: i.name, measurement: i.measurement, quantity: i.quantity, isPurchased: false))
         }
         
         for i in r2.ingredients {
-            groceryList.append(GroceryListItem(ingredient: i, isPurchased: false))
+            groceryList.append(GroceryListItem(id: 2, name: i.name, measurement: i.measurement, quantity: i.quantity, isPurchased: false))
         }
         
         self.tableView.reloadData()
@@ -77,9 +77,20 @@ class GroceryListViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("GroceryListItemCell", forIndexPath: indexPath) as! IngredientCell
         let groceryItem = self.groceryList[indexPath.row]
-        cell.nameTextField.text = groceryItem.ingredient.name
-        cell.measurementTextField.text = groceryItem.ingredient.measurement
-        cell.quantityTextField.text = groceryItem.ingredient.quantity.description
+        
+        cell.quantityTextField.text = groceryItem.quantity.description
+        cell.quantityTextField.tag = (indexPath.row * 10) + 1
+        cell.quantityTextField.keyboardType = .DecimalPad
+        cell.quantityTextField.delegate = self
+        
+        cell.measurementTextField.text = groceryItem.measurement
+        cell.measurementTextField.tag = (indexPath.row * 10) + 2
+        cell.measurementTextField.delegate = self
+        
+        cell.nameTextField.text = groceryItem.name
+        cell.nameTextField.tag = (indexPath.row * 10) + 3
+        cell.nameTextField.delegate = self
+        
         if groceryItem.isPurchased {
             cell.accessoryType = .Checkmark
         }
@@ -92,7 +103,7 @@ class GroceryListViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let groceryItem = self.groceryList[indexPath.row]
-            print("Delete \(groceryItem.ingredient.name)")
+            print("Delete \(groceryItem.name)")
             //TODO: Delete grocery list item from backend
             self.groceryList.removeAtIndex(indexPath.row)
             self.tableView.reloadData()
@@ -104,4 +115,26 @@ class GroceryListViewController: UITableViewController {
         groceryItem.isPurchased = !groceryItem.isPurchased
         self.tableView.reloadData()
     }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        // Ingredients
+        if textField.tag < 1000 {
+            let ingredient = groceryList[textField.tag / 10]
+            if textField.tag % 10 == 1 {
+                let nf = NSNumberFormatter()
+                ingredient.quantity = nf.numberFromString(textField.text!) as! Float
+            }
+            else if textField.tag % 10 == 2 {
+                ingredient.measurement = textField.text!
+            }
+            else if textField.tag % 10 == 3 {
+                ingredient.name = textField.text!
+            }
+        }
+            //Directions
+        else {
+            return
+        }
+    }
+
 }

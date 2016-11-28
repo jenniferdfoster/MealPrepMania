@@ -40,8 +40,8 @@ class MenuTableViewController: UITableViewController {
         r2.directions.append(dir12)
         r2.directions.append(dir13)
         
-        let mi = MenuItem(recipe: r, date: NSDate())
-        let mi2 = MenuItem(recipe: r2, date: NSDate(timeIntervalSinceNow:60*60*24))
+        let mi = MenuItem(id: 1, recipe: r, date: NSDate())
+        let mi2 = MenuItem(id: 2, recipe: r2, date: NSDate(timeIntervalSinceNow:60*60*24))
         
         self.menuItems.append(mi)
         self.menuItems.append(mi2)
