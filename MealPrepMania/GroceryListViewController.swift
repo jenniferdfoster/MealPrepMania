@@ -76,21 +76,23 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("GroceryListItemCell", forIndexPath: indexPath) as! IngredientCell
-        let groceryItem = self.groceryList[indexPath.row]
         
+        let groceryItem = self.groceryList[indexPath.row]
+    
         cell.quantityTextField.text = groceryItem.quantity.description
         cell.quantityTextField.tag = (indexPath.row * 10) + 1
         cell.quantityTextField.keyboardType = .DecimalPad
         cell.quantityTextField.delegate = self
-        
+    
         cell.measurementTextField.text = groceryItem.measurement
         cell.measurementTextField.tag = (indexPath.row * 10) + 2
         cell.measurementTextField.delegate = self
-        
+    
+        cell.nameTextField.textColor = UIColor.darkTextColor()
         cell.nameTextField.text = groceryItem.name
         cell.nameTextField.tag = (indexPath.row * 10) + 3
         cell.nameTextField.delegate = self
-        
+    
         if groceryItem.isPurchased {
             cell.accessoryType = .Checkmark
         }
@@ -137,4 +139,7 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
         }
     }
 
+    @IBAction func addNewItem(sender: AnyObject) {
+        
+    }
 }

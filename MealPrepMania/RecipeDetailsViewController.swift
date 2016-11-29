@@ -70,8 +70,11 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
             cell.nameTextField.delegate = self
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier("DirectionCell", forIndexPath: indexPath)
-            cell.textLabel!.text = recipe.directions[indexPath.row].text
+            let cell = tableView.dequeueReusableCellWithIdentifier("DirectionCell", forIndexPath: indexPath) as! DirectionCell
+            //cell.textLabel!.text = recipe.directions[indexPath.row].text
+            cell.directionTextField.text = recipe.directions[indexPath.row].text
+            cell.directionTextField.tag = (indexPath.row) + 1000
+            cell.directionTextField.delegate = self
             return cell
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier("DirectionCell", forIndexPath: indexPath)
@@ -80,16 +83,16 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.section {
-        case 0:
-            return
-        case 1:
-            updateDirection(self.recipe.directions[indexPath.row])
-        default:
-            return
-        }
-    }
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        switch indexPath.section {
+//        case 0:
+//            return
+//        case 1:
+//            updateDirection(self.recipe.directions[indexPath.row])
+//        default:
+//            return
+//        }
+//    }
     
     @IBAction func addToMenu(sender: AnyObject) {
         let datePicker = UIDatePicker()
@@ -193,6 +196,8 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         }
         //Directions
         else {
+            let direction = self.recipe.directions[textField.tag - 1000]
+            direction.text = textField.text!
             return
         }
     }

@@ -66,11 +66,13 @@ class MenuTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MenuItemCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("MenuItemCell", forIndexPath: indexPath) as! MenuItemCell
         let menuItem = self.menuItems[indexPath.row]
-        cell.textLabel?.text = menuItem.recipe.title
-        dateFormatter.dateFormat = "MMM dd"
-        cell.detailTextLabel?.text = dateFormatter.stringFromDate(menuItem.date)
+        dateFormatter.dateFormat = "MMM"
+        cell.recipeLabel.text = menuItem.recipe.title
+        cell.monthLabel.text = dateFormatter.stringFromDate(menuItem.date)
+        dateFormatter.dateFormat = "dd"
+        cell.dayLabel.text = dateFormatter.stringFromDate(menuItem.date)
         return cell
     }
     

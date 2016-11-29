@@ -23,6 +23,8 @@
 		CB3AE46A1DEB7C2A00A7A618 /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4691DEB7C2A00A7A618 /* IngredientCell.swift */; };
 		CB3AE46C1DEB8BF600A7A618 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE46B1DEB8BF600A7A618 /* MenuTableViewController.swift */; };
 		CB3AE46E1DEB969000A7A618 /* GroceryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE46D1DEB969000A7A618 /* GroceryListViewController.swift */; };
+		CB43E9671DED038A007F0430 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB43E9661DED038A007F0430 /* MenuItemCell.swift */; };
+		CB43E9691DED0B8E007F0430 /* DirectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB43E9681DED0B8E007F0430 /* DirectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		CB3AE4691DEB7C2A00A7A618 /* IngredientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
 		CB3AE46B1DEB8BF600A7A618 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		CB3AE46D1DEB969000A7A618 /* GroceryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListViewController.swift; sourceTree = "<group>"; };
+		CB43E9661DED038A007F0430 /* MenuItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
+		CB43E9681DED0B8E007F0430 /* DirectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,8 @@
 				CB1622AC1DDAA31A0001D80F /* AppDelegate.swift */,
 				CB3AE4541DEB627200A7A618 /* MealPrepManiaAPI.swift */,
 				CB3AE4671DEB786200A7A618 /* Main.storyboard */,
+				CB43E9681DED0B8E007F0430 /* DirectionCell.swift */,
+				CB43E9661DED038A007F0430 /* MenuItemCell.swift */,
 				CB3AE4691DEB7C2A00A7A618 /* IngredientCell.swift */,
 				CB3AE4611DEB72A200A7A618 /* RecipeDetailsViewController.swift */,
 				CB3AE4521DEB625900A7A618 /* RecipesTableViewController.swift */,
@@ -179,6 +185,7 @@
 				CB1622AD1DDAA31A0001D80F /* AppDelegate.swift in Sources */,
 				CB3AE4531DEB625900A7A618 /* RecipesTableViewController.swift in Sources */,
 				CB3AE45B1DEB64C100A7A618 /* Ingredient.swift in Sources */,
+				CB43E9691DED0B8E007F0430 /* DirectionCell.swift in Sources */,
 				CB3AE4621DEB72A200A7A618 /* RecipeDetailsViewController.swift in Sources */,
 				CB1622B51DDAA31A0001D80F /* MealPrepMania.xcdatamodeld in Sources */,
 				CB3AE4551DEB627200A7A618 /* MealPrepManiaAPI.swift in Sources */,
@@ -187,6 +194,7 @@
 				CB3AE46C1DEB8BF600A7A618 /* MenuTableViewController.swift in Sources */,
 				CB3AE4571DEB637900A7A618 /* Recipe.swift in Sources */,
 				CB3AE46E1DEB969000A7A618 /* GroceryListViewController.swift in Sources */,
+				CB43E9671DED038A007F0430 /* MenuItemCell.swift in Sources */,
 				CB3AE45F1DEB65BB00A7A618 /* GroceryListItem.swift in Sources */,
 				CB3AE4591DEB644700A7A618 /* Direction.swift in Sources */,
 			);
