@@ -26,8 +26,8 @@
                                         <color key="titleColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
+                                        <action selector="addNewRecipe:" destination="PVd-6V-muQ" eventType="touchUpInside" id="oqL-4h-Lz8"/>
                                         <action selector="addRecipe:" destination="PVd-6V-muQ" eventType="touchUpInside" id="NSw-YX-vdp"/>
-                                        <segue destination="6n8-IM-a1e" kind="show" identifier="NewRecipe" id="ksT-va-Zqp"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -99,7 +99,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="sQ7-y6-wEq">
-                            <rect key="frame" x="0.0" y="263.5" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="351.5" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkL-Hy-R34">
@@ -223,6 +223,48 @@
                                 <connections>
                                     <outlet property="directionTextField" destination="xw2-Mh-UZn" id="Zmu-44-1O4"/>
                                 </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddIngredientCell" id="5fe-Ku-ioj">
+                                <rect key="frame" x="0.0" y="245.5" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5fe-Ku-ioj" id="Jbj-L9-1fr">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYJ-YU-Y7p">
+                                            <rect key="frame" x="250" y="5" width="101" height="30"/>
+                                            <state key="normal" title="Add Ingredient"/>
+                                            <connections>
+                                                <action selector="addIngredient:" destination="6n8-IM-a1e" eventType="touchUpInside" id="jeC-Nj-GxT"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="WYJ-YU-Y7p" firstAttribute="centerY" secondItem="Jbj-L9-1fr" secondAttribute="centerY" id="CHD-yE-383"/>
+                                        <constraint firstItem="WYJ-YU-Y7p" firstAttribute="centerX" secondItem="Jbj-L9-1fr" secondAttribute="centerX" id="CtI-UI-Izu"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddDirectionCell" id="WJb-PR-OAb" customClass="DirectionCell" customModule="MealPrepMania" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="289.5" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WJb-PR-OAb" id="SwI-qx-ybE">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAe-FP-voM">
+                                            <rect key="frame" x="253" y="7" width="94" height="30"/>
+                                            <state key="normal" title="Add Direction"/>
+                                            <connections>
+                                                <action selector="addDirection:" destination="6n8-IM-a1e" eventType="touchUpInside" id="Pk8-Jx-PrS"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="BAe-FP-voM" firstAttribute="centerX" secondItem="SwI-qx-ybE" secondAttribute="centerX" id="Hl1-dQ-a7S"/>
+                                        <constraint firstItem="BAe-FP-voM" firstAttribute="centerY" secondItem="SwI-qx-ybE" secondAttribute="centerY" id="Xqg-kS-o9x"/>
+                                    </constraints>
+                                </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -517,7 +559,4 @@
             <point key="canvasLocation" x="1007" y="424"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="ksT-va-Zqp"/>
-    </inferredMetricsTieBreakers>
 </document>

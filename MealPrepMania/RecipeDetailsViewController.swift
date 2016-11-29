@@ -50,14 +50,22 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-//    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        switch section {
-//        case 0:
-//        case 1:
-//        default:
-//            return nil
-//        }
-//    }
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        switch section {
+        case 0:
+            let cell = tableView.dequeueReusableCellWithIdentifier("AddIngredientCell")
+            return cell!.contentView
+        case 1:
+            let cell = tableView.dequeueReusableCellWithIdentifier("AddDirectionCell")
+            return cell!.contentView
+        default:
+            return nil
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 40
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
@@ -80,7 +88,6 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("DirectionCell", forIndexPath: indexPath) as! DirectionCell
-            //cell.textLabel!.text = recipe.directions[indexPath.row].text
             cell.directionTextField.text = recipe.directions[indexPath.row].text
             cell.directionTextField.tag = (indexPath.row) + 1000
             cell.directionTextField.delegate = self
@@ -92,16 +99,20 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        switch indexPath.section {
-//        case 0:
-//            return
-//        case 1:
-//            updateDirection(self.recipe.directions[indexPath.row])
-//        default:
-//            return
-//        }
-//    }
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            switch indexPath.section {
+            case 0:
+                //TODO: Delete ingredient
+                self.tableView.reloadData()
+            case 1:
+                //TODO: Delete direction
+                self.tableView.reloadData()
+            default:
+                return
+            }
+        }
+    }
     
     @IBAction func addToMenu(sender: AnyObject) {
         let datePicker = UIDatePicker()
@@ -134,51 +145,6 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         ac.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         presentViewController(ac, animated: true, completion: nil)
     }
-    
-    func updateDirection(direction: Direction) {
-        
-        let title = "Edit Direction"
-        let message = ""
-        
-        let alertController = UIAlertController(title: title,
-                                                message: message,
-                                                preferredStyle: .Alert)
-        
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .Cancel,
-                                         handler: nil)
-        
-        let saveAction = UIAlertAction(title: "Save",
-                                       style: UIAlertActionStyle.Default,
-                                       handler: {
-                                        alert -> Void in
-                                        
-                                        let descriptionTextField = alertController.textFields![0] as UITextField
-                                        direction.text = descriptionTextField.text!
-                                        self.tableView.reloadData()
-                                        //TODO: Save to backend
-                                        
-                                        
-//                                        self.trelloAPI.updateRecipe(card.id, name: titleTextField.text!, description: descriptionTextField.text!) {
-//                                            (updatedCard)->Void in
-//                                            card.name = updatedCard.name
-//                                            card.description = updatedCard.description
-//                                            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
-//                                        }
-        })
-        
-        alertController.addTextFieldWithConfigurationHandler {
-            (textField : UITextField!) -> Void in
-            textField.placeholder = "Enter Directions Text"
-            textField.text = direction.text
-        }
-        
-        alertController.addAction(saveAction)
-        alertController.addAction(cancelAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-
     
     @IBAction func deleteRecipe(sender: AnyObject) {
         mealPrepManiaAPI.deleteRecipe(self.recipe.id)
@@ -218,4 +184,13 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         let date = datePicker.date
         myTextField.text = dateFormatter.stringFromDate(date)
     }
+    
+    @IBAction func addIngredient(sender: AnyObject) {
+        //TODO: Add ingredient to backend, reload
+    }
+    
+    @IBAction func addDirection(sender: AnyObject) {
+        //TODO: Add direction to backend, reload
+    }
+    
 }

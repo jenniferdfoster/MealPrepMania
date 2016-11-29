@@ -81,14 +81,12 @@
 			isa = PBXGroup;
 			children = (
 				CB3AE4601DEB674D00A7A618 /* Model */,
+				CB43E96A1DED168E007F0430 /* TableViewCells */,
 				CB1622AC1DDAA31A0001D80F /* AppDelegate.swift */,
 				CB3AE4541DEB627200A7A618 /* MealPrepManiaAPI.swift */,
 				CB3AE4671DEB786200A7A618 /* Main.storyboard */,
-				CB43E9681DED0B8E007F0430 /* DirectionCell.swift */,
-				CB43E9661DED038A007F0430 /* MenuItemCell.swift */,
-				CB3AE4691DEB7C2A00A7A618 /* IngredientCell.swift */,
-				CB3AE4611DEB72A200A7A618 /* RecipeDetailsViewController.swift */,
 				CB3AE4521DEB625900A7A618 /* RecipesTableViewController.swift */,
+				CB3AE4611DEB72A200A7A618 /* RecipeDetailsViewController.swift */,
 				CB3AE46B1DEB8BF600A7A618 /* MenuTableViewController.swift */,
 				CB3AE46D1DEB969000A7A618 /* GroceryListViewController.swift */,
 				CB1622B61DDAA31A0001D80F /* Assets.xcassets */,
@@ -109,6 +107,16 @@
 				CB3AE45E1DEB65BB00A7A618 /* GroceryListItem.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		CB43E96A1DED168E007F0430 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				CB43E9661DED038A007F0430 /* MenuItemCell.swift */,
+				CB3AE4691DEB7C2A00A7A618 /* IngredientCell.swift */,
+				CB43E9681DED0B8E007F0430 /* DirectionCell.swift */,
+			);
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

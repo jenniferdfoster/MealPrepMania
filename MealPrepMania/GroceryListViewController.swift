@@ -49,11 +49,11 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
         
         self.tableView.reloadData()
         
-        //        mealPrepManiaAPI.fetchAllRecipes{
-        //            (allRecipes)->Void in
-        //            self.recipes = allRecipes
-        //            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
-        //        }
+        mealPrepManiaAPI.fetchGroceryList{
+            (allGroceryListItems)->Void in
+            self.groceryList = allGroceryListItems
+            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
+        }
     }
     
 //    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -133,8 +133,11 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
     }
 
     @IBAction func addNewItem(sender: AnyObject) {
-        //TODO: Add grocery list item to backend, reload
-        self.tableView.reloadData()
+        mealPrepManiaAPI.addGroceryListItem {
+            (newItem)->Void in
+            self.groceryList.append(newItem)
+            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
+        }
     }
     
     @IBAction func deleteAllCheckedItems(sender: AnyObject) {
@@ -164,8 +167,5 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
         alertController.addAction(deleteAction)
         
         presentViewController(alertController, animated: true, completion: nil)
-        
-        
-        
-            }
+    }
 }

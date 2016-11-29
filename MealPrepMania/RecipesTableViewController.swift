@@ -44,11 +44,11 @@ class RecipesTableViewController: UITableViewController {
         recipes.append(r2)
         self.tableView.reloadData()
         
-//        mealPrepManiaAPI.fetchAllRecipes{
-//            (allRecipes)->Void in
-//            self.recipes = allRecipes
-//            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
-//        }
+        mealPrepManiaAPI.fetchAllRecipes{
+            (allRecipes)->Void in
+            self.recipes = allRecipes
+            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
+        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,10 +62,10 @@ class RecipesTableViewController: UITableViewController {
         return cell
     }
     
-    
-    // TODO: Add New Recipe API Call, then Prepare for Segue!
-    
-    
+    @IBAction func addNewRecipe(sender: AnyObject) {
+        //TODO: Create new Recipe, then
+        //performSegueWithIdentifier("ShowRecipe", sender: nil)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowRecipe" {
