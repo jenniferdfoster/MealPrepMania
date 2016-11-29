@@ -106,29 +106,40 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
         if editingStyle == .Delete {
             let groceryItem = self.groceryList[indexPath.row]
             print("Delete \(groceryItem.name)")
-            //TODO: Delete grocery list item from backend
+            self.mealPrepManiaAPI.deleteGroceryItem(groceryItem.id)
             self.groceryList.removeAtIndex(indexPath.row)
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             self.tableView.reloadData()
         }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let groceryItem = self.groceryList[indexPath.row]
-        groceryItem.isPurchased = !groceryItem.isPurchased
+        //groceryItem.isPurchased = !groceryItem.isPurchased
+        mealPrepManiaAPI.updateGroceryListItem(groceryItem.id, name: groceryItem.name, quantity: groceryItem.quantity, measurement: groceryItem.measurement, isPurchased: !groceryItem.isPurchased) {
+                (updatedItem)->Void in
+                groceryItem.isPurchased = updatedItem.isPurchased
+                dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
+        }
         self.tableView.reloadData()
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        let ingredient = groceryList[textField.tag / 10]
+        let groceryItem = groceryList[textField.tag / 10]
         if textField.tag % 10 == 1 {
             let nf = NSNumberFormatter()
-            ingredient.quantity = nf.numberFromString(textField.text!) as! Float
+            groceryItem.quantity = nf.numberFromString(textField.text!) as! Float
         }
         else if textField.tag % 10 == 2 {
-            ingredient.measurement = textField.text!
+            groceryItem.measurement = textField.text!
         }
         else if textField.tag % 10 == 3 {
-            ingredient.name = textField.text!
+            groceryItem.name = textField.text!
+        }
+        mealPrepManiaAPI.updateGroceryListItem(groceryItem.id, name: groceryItem.name, quantity: groceryItem.quantity, measurement: groceryItem.measurement, isPurchased: groceryItem.isPurchased) {
+            (updatedItem)->Void in
+            groceryItem.isPurchased = updatedItem.isPurchased
+            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
         }
     }
 
@@ -157,10 +168,10 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
                                          handler: { (action) -> Void in
                                             for item in self.groceryList {
                                                 if(item.isPurchased) {
-                                                    //TODO: Delete grocery list item from backend
-                                                    self.tableView.reloadData()
+                                                    self.mealPrepManiaAPI.deleteGroceryItem(item.id)
                                                 }
                                             }
+                                            self.tableView.reloadData()
         })
         
         alertController.addAction(cancelAction)

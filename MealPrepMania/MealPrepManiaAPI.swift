@@ -9,8 +9,8 @@
 import Foundation
 
 class MealPrepManiaAPI {
-    //private let baseURLString = "https://django-workspace-taylorfoster.c9users.io"
-    private let baseURLString = "https://thawing-eyrie-74516.herokuapp.com"
+    private let baseURLString = "https://django-workspace-taylorfoster.c9users.io"
+//    private let baseURLString = "https://thawing-eyrie-74516.herokuapp.com"
     
     let session: NSURLSession = {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -51,7 +51,8 @@ class MealPrepManiaAPI {
             
             var recipes = [Recipe]()
             for recipeDictionary in jsonDictionary {
-                recipes.append(Recipe(id: (recipeDictionary["id"] as? Int)!, title: (recipeDictionary["title"] as? String)!))
+                recipes.append(Recipe(id: (recipeDictionary["id"] as? Int)!,
+                                        title: (recipeDictionary["title"] as? String)!))
             }
             print(recipes)
             return recipes
@@ -90,7 +91,8 @@ class MealPrepManiaAPI {
                 else {
                     return nil
             }
-            let recipe = Recipe(id: (jsonDictionary["id"] as? Int)!, title: (jsonDictionary["title"] as? String)!)
+            let recipe = Recipe(id: (jsonDictionary["id"] as? Int)!,
+                                title: (jsonDictionary["title"] as? String)!)
             return recipe
         }
         catch let error {
@@ -132,12 +134,7 @@ class MealPrepManiaAPI {
             return nil
         }
         do {
-            
-            //            let feedStr = String.init(data: jsonData, encoding: NSUTF8StringEncoding)
-            //            print(feedStr?.characters)
-            
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
-            //            print("jsonObject: \(jsonObject)")
             guard let
                 jsonDictionary = jsonObject as? [[NSObject:AnyObject]]
                 else {
@@ -147,12 +144,61 @@ class MealPrepManiaAPI {
             var list = [GroceryListItem]()
             for listDictionary in jsonDictionary {
                 list.append(GroceryListItem(id: (listDictionary["id"] as? Int)!,
-                                            name: (listDictionary["name"] as? String)!,
-                                            measurement: (listDictionary["measurement"] as? String)!,
-                                            quantity: (listDictionary["quantity"] as? Float)!,
-                                            isPurchased: (listDictionary["isPurchased"] as? Bool)!))
+                    name: (listDictionary["name"] as? String)!,
+                    measurement: (listDictionary["measurement"] as? String)!,
+                    quantity: (listDictionary["quantity"] as? Float)!,
+                    isPurchased: (listDictionary["isPurchased"] as? Bool)!))
             }
             return list
+        }
+        catch let error {
+            print(error)
+            return nil
+        }
+    }
+
+    
+    func updateGroceryListItem(id: Int, name: String, quantity: Float, measurement: String, isPurchased: Bool, completion: (GroceryListItem) -> Void) {
+        if let newName = name.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()),
+            newMeasurement = measurement.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()),
+            newQuantity = quantity.description.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()){
+            let url = NSURL(string: "\(baseURLString)/groceryList/?id=\(id)&name=\(newName)&measurement=\(newMeasurement)&quantity=\(newQuantity)&isPurchased=\(isPurchased)")!
+            print(url)
+            let request = NSMutableURLRequest(URL: url)
+            request.HTTPMethod = "POST"
+            let task = session.dataTaskWithRequest(request) {
+                (data, response, error) -> Void in
+                
+                if let list = self.processUpdateGroceryListRequest(data: data, error: error) {
+                    completion(list)
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    func processUpdateGroceryListRequest(data data: NSData?, error: NSError?) -> GroceryListItem? {
+        guard let jsonData = data else {
+            return nil
+        }
+        do {
+            
+                        let feedStr = String.init(data: jsonData, encoding: NSUTF8StringEncoding)
+                        print(feedStr?.characters)
+            let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
+            
+            guard let
+                jsonDictionary = jsonObject as? [NSObject:AnyObject]
+                else {
+                    return nil
+            }
+            
+            let item = GroceryListItem(id: (jsonDictionary["id"] as? Int)!,
+                                       name: (jsonDictionary["name"] as? String)!,
+                                       measurement: (jsonDictionary["measurement"] as? String)!,
+                                       quantity: (jsonDictionary["quantity"] as? Float)!,
+                                       isPurchased: (jsonDictionary["isPurchased"] as? Bool)!)
+            return item
         }
         catch let error {
             print(error)
