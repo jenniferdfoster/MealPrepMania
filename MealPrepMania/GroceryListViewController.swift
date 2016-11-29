@@ -119,27 +119,53 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        // Ingredients
-        if textField.tag < 1000 {
-            let ingredient = groceryList[textField.tag / 10]
-            if textField.tag % 10 == 1 {
-                let nf = NSNumberFormatter()
-                ingredient.quantity = nf.numberFromString(textField.text!) as! Float
-            }
-            else if textField.tag % 10 == 2 {
-                ingredient.measurement = textField.text!
-            }
-            else if textField.tag % 10 == 3 {
-                ingredient.name = textField.text!
-            }
+        let ingredient = groceryList[textField.tag / 10]
+        if textField.tag % 10 == 1 {
+            let nf = NSNumberFormatter()
+            ingredient.quantity = nf.numberFromString(textField.text!) as! Float
         }
-            //Directions
-        else {
-            return
+        else if textField.tag % 10 == 2 {
+            ingredient.measurement = textField.text!
+        }
+        else if textField.tag % 10 == 3 {
+            ingredient.name = textField.text!
         }
     }
 
     @IBAction func addNewItem(sender: AnyObject) {
-        
+        //TODO: Add grocery list item to backend, reload
+        self.tableView.reloadData()
     }
+    
+    @IBAction func deleteAllCheckedItems(sender: AnyObject) {
+        let title = "Delete All Checked Items"
+        let message = "Are you sure you want to delete all purchased items?"
+        
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .ActionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .Cancel,
+                                         handler: nil)
+        
+        let deleteAction = UIAlertAction(title: "Delete",
+                                         style: .Destructive,
+                                         handler: { (action) -> Void in
+                                            for item in self.groceryList {
+                                                if(item.isPurchased) {
+                                                    //TODO: Delete grocery list item from backend
+                                                    self.tableView.reloadData()
+                                                }
+                                            }
+        })
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+        
+        
+        
+            }
 }

@@ -50,6 +50,15 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
+//    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        switch section {
+//        case 0:
+//        case 1:
+//        default:
+//            return nil
+//        }
+//    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:

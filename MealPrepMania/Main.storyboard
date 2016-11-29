@@ -328,8 +328,17 @@
                             <rect key="frame" x="0.0" y="219.5" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcb-8t-IQm">
+                                    <rect key="frame" x="300" y="7" width="292" height="30"/>
+                                    <state key="normal" title="Delete All Checked Items">
+                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="deleteAllCheckedItems:" destination="Sld-GU-SUb" eventType="touchUpInside" id="qr0-rl-Q9c"/>
+                                    </connections>
+                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jt0-eS-1aZ">
-                                    <rect key="frame" x="252" y="7" width="97" height="30"/>
+                                    <rect key="frame" x="8" y="7" width="292" height="30"/>
                                     <state key="normal" title="Add New Item"/>
                                     <connections>
                                         <action selector="addNewItem:" destination="Sld-GU-SUb" eventType="touchUpInside" id="I2a-Y9-f2x"/>
@@ -338,9 +347,23 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="Jt0-eS-1aZ" firstAttribute="centerX" secondItem="FCm-b8-MH0" secondAttribute="centerX" id="1ij-NX-VuI"/>
-                                <constraint firstItem="Jt0-eS-1aZ" firstAttribute="centerY" secondItem="FCm-b8-MH0" secondAttribute="centerY" id="8qt-EP-kk6"/>
+                                <constraint firstItem="wcb-8t-IQm" firstAttribute="width" secondItem="Jt0-eS-1aZ" secondAttribute="width" id="0UN-Gp-y5A"/>
+                                <constraint firstItem="Jt0-eS-1aZ" firstAttribute="leading" secondItem="FCm-b8-MH0" secondAttribute="leading" constant="8" id="8tW-fL-VUA"/>
+                                <constraint firstItem="Jt0-eS-1aZ" firstAttribute="top" secondItem="FCm-b8-MH0" secondAttribute="top" constant="7" id="EQh-H7-QR5"/>
+                                <constraint firstItem="wcb-8t-IQm" firstAttribute="leading" secondItem="Jt0-eS-1aZ" secondAttribute="trailing" id="HQS-GP-YNd"/>
+                                <constraint firstAttribute="bottom" secondItem="wcb-8t-IQm" secondAttribute="bottom" constant="7" id="Trv-yK-nDk"/>
+                                <constraint firstAttribute="bottom" secondItem="Jt0-eS-1aZ" secondAttribute="bottom" constant="7" id="XO3-aP-7aD"/>
+                                <constraint firstAttribute="trailing" secondItem="wcb-8t-IQm" secondAttribute="trailing" constant="8" id="evr-7N-i8A"/>
+                                <constraint firstItem="wcb-8t-IQm" firstAttribute="width" secondItem="Jt0-eS-1aZ" secondAttribute="width" id="hIJ-ov-sCT"/>
+                                <constraint firstItem="Jt0-eS-1aZ" firstAttribute="top" secondItem="FCm-b8-MH0" secondAttribute="top" constant="7" id="u8v-3F-z3l"/>
+                                <constraint firstItem="wcb-8t-IQm" firstAttribute="top" secondItem="FCm-b8-MH0" secondAttribute="top" constant="7" id="xi7-fy-Hma"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="u8v-3F-z3l"/>
+                                    <exclude reference="0UN-Gp-y5A"/>
+                                </mask>
+                            </variation>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="GroceryListItemCell" id="JeK-a3-mB4" customClass="IngredientCell" customModule="MealPrepMania" customModuleProvider="target">
