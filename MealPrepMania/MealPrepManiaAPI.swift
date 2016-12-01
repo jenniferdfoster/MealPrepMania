@@ -104,6 +104,8 @@ class MealPrepManiaAPI {
             let request = NSMutableURLRequest(URL: url)
             request.HTTPMethod = "POST"
             request.HTTPBody = jsonData
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
             let task = session.dataTaskWithRequest(request) {
                 (data, response, error) -> Void in
                 
@@ -220,12 +222,15 @@ class MealPrepManiaAPI {
                         "measurement": measurement,
                         "quantity": quantity,
                         "isPurchased": isPurchased]
+        
           
         do {
-            let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: .PrettyPrinted)
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: [])
             let request = NSMutableURLRequest(URL: url)
             request.HTTPMethod = "POST"
             request.HTTPBody = jsonData
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
             let task = session.dataTaskWithRequest(request) {
                 (data, response, error) -> Void in
             
@@ -296,7 +301,7 @@ class MealPrepManiaAPI {
         }
     }
 
-    func deleteGroceryItem(id: Int) {
+    func deleteGroceryItem(id: Int, completion: () -> Void) {
         let url = NSURL(string: "\(baseURLString)/groceryList/\(id)")!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "DELETE"
@@ -306,6 +311,7 @@ class MealPrepManiaAPI {
                 print("Error: did not receive data")
                 return
             }
+            completion()
         }
         task.resume()
     }
@@ -371,14 +377,15 @@ class MealPrepManiaAPI {
     func updateMenuItem(id: Int, recipe: Recipe, date: NSDate, completion: (MenuItem) -> Void) {
         do {
             let url = NSURL(string: "\(baseURLString)/menu/\(id)")!
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = .MediumStyle
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
             let jsonDict = ["date": dateFormatter.stringFromDate(date),
-                            "recipe": recipe.id]
-            let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: .PrettyPrinted)
+                            "recipe": recipe]
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: [])
             let request = NSMutableURLRequest(URL: url)
             request.HTTPMethod = "POST"
             request.HTTPBody = jsonData
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
             let task = session.dataTaskWithRequest(request) {
                 (data, response, error) -> Void in
                 
@@ -408,8 +415,7 @@ class MealPrepManiaAPI {
                 else {
                     return nil
             }
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = .MediumStyle
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
             let recipeDictionary = jsonDictionary["recipe"] as? [NSObject: AnyObject]
             let recipe = self.recipeFromDict(recipeDictionary!)
             let item = MenuItem(id: (jsonDictionary["id"] as? Int)!,

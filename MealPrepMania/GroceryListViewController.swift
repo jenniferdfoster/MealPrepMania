@@ -21,6 +21,10 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.loadGroceryList()
+    }
+    
+    func loadGroceryList() {
         // Get all grocery list items
         mealPrepManiaAPI.fetchGroceryList{
             (allGroceryListItems)->Void in
@@ -64,7 +68,7 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let groceryItem = self.groceryList[indexPath.row]
-            self.mealPrepManiaAPI.deleteGroceryItem(groceryItem.id)
+            self.mealPrepManiaAPI.deleteGroceryItem(groceryItem.id) { _ in }
             self.groceryList.removeAtIndex(indexPath.row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
@@ -121,12 +125,14 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
         let deleteAction = UIAlertAction(title: "Delete",
                                          style: .Destructive,
                                          handler: { (action) -> Void in
-                                            for item in self.groceryList {
+                                            for i in 0...self.groceryList.count - 1 {
+                                                let item = self.groceryList[i]
                                                 if(item.isPurchased) {
-                                                    self.mealPrepManiaAPI.deleteGroceryItem(item.id)
+                                                    self.mealPrepManiaAPI.deleteGroceryItem(item.id) { _ in
+                                                        self.loadGroceryList()
+                                                    }
                                                 }
                                             }
-                                            self.tableView.reloadData()
         })
         
         alertController.addAction(cancelAction)

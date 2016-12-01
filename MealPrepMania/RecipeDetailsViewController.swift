@@ -107,14 +107,15 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         if editingStyle == .Delete {
             switch indexPath.section {
             case 0:
-                //TODO: Delete ingredient
+                self.recipe.ingredients.removeAtIndex(indexPath.row)
                 self.tableView.reloadData()
             case 1:
-                //TODO: Delete direction
+                self.recipe.directions.removeAtIndex(indexPath.row)
                 self.tableView.reloadData()
             default:
                 return
             }
+            self.updateRecipe()
         }
     }
     
@@ -136,14 +137,14 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: {
             alert -> Void in
             // Add recipe to menu on specified date
-            let mi = MenuItem(id: 3, recipe: self.recipe, date: datePicker.date)
-            //TODO: Save Menu Item to backend
-            print("Created Menu Item on \(mi.date)")
+            //let mi = MenuItem(id: 3, recipe: self.recipe, date: datePicker.date)
+            self.mealPrepManiaAPI.addMenuItem(self.recipe, date: datePicker.date) { _ in }
+            //print("Created Menu Item on \(mi.date)")
             // Add ingredients to grocery list
             for ingredient in self.recipe.ingredients {
-                let gi = GroceryListItem(id:4, name: ingredient.name, measurement: ingredient.measurement, quantity: ingredient.quantity, isPurchased: false)
-                print ("Added grocery list item \(gi.name)")
-                //TODO: Save GI to backend
+                //let gi = GroceryListItem(id:4, name: ingredient.name, measurement: ingredient.measurement, quantity: ingredient.quantity, isPurchased: false)
+                //print ("Added grocery list item \(gi.name)")
+                self.mealPrepManiaAPI.addGroceryListItem(ingredient.name, quantity: ingredient.quantity, measurement: ingredient.measurement) { _ in }
             }
         }))
 
@@ -177,19 +178,25 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         else {
             let direction = self.recipe.directions[textField.tag - 1000]
             direction.text = textField.text!
-            return
+        }
+        self.updateRecipe()
+    }
+    
+    func updateRecipe(){
+        self.mealPrepManiaAPI.updateRecipe(self.recipe.id, title: self.recipe.title, ingredients: self.recipe.ingredients, directions: self.recipe.directions) {
+            (recipe)->Void in
+            self.recipe = recipe
+            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
         }
     }
     
-    func dateSelected(datePicker:UIDatePicker)
-    {
+    func dateSelected(datePicker:UIDatePicker){
         let date = datePicker.date
         myTextField.text = dateFormatter.stringFromDate(date)
     }
     
     @IBAction func addIngredient(sender: AnyObject) {
         //TODO: Add ingredient to backend, reload
-        
     }
     
     @IBAction func addDirection(sender: AnyObject) {
