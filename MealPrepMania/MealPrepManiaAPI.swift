@@ -82,7 +82,7 @@ class MealPrepManiaAPI {
     func addRecipe(completion: (Recipe) -> Void) {
         let url = NSURL(string: "\(baseURLString)/recipes/")!
         let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
+        request.HTTPMethod = "PUT"
         let task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
@@ -132,8 +132,7 @@ class MealPrepManiaAPI {
                 else {
                     return nil
             }
-            let recipe = Recipe(id: (jsonDictionary["id"] as? Int)!,
-                                title: (jsonDictionary["title"] as? String)!)
+            let recipe = recipeFromDict(jsonDictionary)
             return recipe
         }
         catch let error {

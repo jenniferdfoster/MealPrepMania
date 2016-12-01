@@ -143,6 +143,7 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
             for ingredient in self.recipe.ingredients {
                 let gi = GroceryListItem(id:4, name: ingredient.name, measurement: ingredient.measurement, quantity: ingredient.quantity, isPurchased: false)
                 print ("Added grocery list item \(gi.name)")
+                //TODO: Save GI to backend
             }
         }))
 
