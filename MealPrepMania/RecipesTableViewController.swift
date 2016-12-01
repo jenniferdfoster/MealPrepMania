@@ -63,8 +63,12 @@ class RecipesTableViewController: UITableViewController {
     }
     
     @IBAction func addNewRecipe(sender: AnyObject) {
-        //TODO: Create new Recipe, then
-        //performSegueWithIdentifier("ShowRecipe", sender: nil)
+        mealPrepManiaAPI.addRecipe {
+            (newRecipe)->Void in
+            self.recipes.append(newRecipe)
+            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
+            self.tableView.selectRowAtIndexPath(NSIndexPath.init(forRow: self.recipes.count - 1, inSection: 0), animated: true, scrollPosition: .Bottom)
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -77,11 +81,6 @@ class RecipesTableViewController: UITableViewController {
                 detailsViewController.recipe = recipe
                 detailsViewController.mealPrepManiaAPI = mealPrepManiaAPI
             }
-        }
-        
-        if segue.identifier == "NewRecipe" {
-            let detailsViewController = segue.destinationViewController as! RecipeDetailsViewController
-            detailsViewController.mealPrepManiaAPI = mealPrepManiaAPI
         }
     }
 }

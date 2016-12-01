@@ -12,6 +12,8 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
     
     var mealPrepManiaAPI: MealPrepManiaAPI!
     var groceryList: [GroceryListItem] = [GroceryListItem]()
+    
+    let floatFormatter = NSNumberFormatter()
     let dateFormatter = NSDateFormatter()
     
     override func viewDidLoad() {
@@ -65,7 +67,7 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
         
         let groceryItem = self.groceryList[indexPath.row]
     
-        cell.quantityTextField.text = groceryItem.quantity.description
+        cell.quantityTextField.text = floatFormatter.stringFromNumber(groceryItem.quantity)
         cell.quantityTextField.tag = (indexPath.row * 10) + 1
         cell.quantityTextField.keyboardType = .DecimalPad
         cell.quantityTextField.delegate = self
@@ -111,8 +113,7 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
         let groceryItem = groceryList[textField.tag / 10]
         if textField.tag % 10 == 1 {
-            let nf = NSNumberFormatter()
-            groceryItem.quantity = nf.numberFromString(textField.text!) as! Float
+            groceryItem.quantity = floatFormatter.numberFromString(textField.text!) as! Float
         }
         else if textField.tag % 10 == 2 {
             groceryItem.measurement = textField.text!

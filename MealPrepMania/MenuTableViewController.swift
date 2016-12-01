@@ -53,6 +53,7 @@ class MenuTableViewController: UITableViewController {
         mealPrepManiaAPI.fetchMenu{
             (allMenuItems)->Void in
             self.menuItems = allMenuItems
+            self.sortMenu()
             dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
         }
     }
@@ -104,9 +105,11 @@ class MenuTableViewController: UITableViewController {
         })
         ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: {
             alert -> Void in
-            // Add recipe to menu on specified date
             menuItem.date = datePicker.date
-            //TODO: Save Menu Item to backend
+            self.mealPrepManiaAPI.updateMenuItem(menuItem.id, recipe: menuItem.recipe, date: datePicker.date){
+                (updatedItem)->Void in
+                dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
+            }
             print("Updated Menu Item to \(menuItem.date)")
             self.sortMenu()
             self.tableView.reloadData()

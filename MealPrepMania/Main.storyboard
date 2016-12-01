@@ -27,7 +27,6 @@
                                     </state>
                                     <connections>
                                         <action selector="addNewRecipe:" destination="PVd-6V-muQ" eventType="touchUpInside" id="oqL-4h-Lz8"/>
-                                        <action selector="addRecipe:" destination="PVd-6V-muQ" eventType="touchUpInside" id="NSw-YX-vdp"/>
                                     </connections>
                                 </button>
                             </subviews>

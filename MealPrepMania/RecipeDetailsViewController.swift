@@ -11,9 +11,12 @@ import UIKit
 class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
     
     var mealPrepManiaAPI: MealPrepManiaAPI!
-    var recipe: Recipe = Recipe(id: 1, title: "boo")
+    var recipe: Recipe = Recipe(id: 1, title: "")
     var myTextField: UITextField = UITextField()
     @IBOutlet var recipeTitleTextField: UITextField!
+    
+    let dateFormatter = NSDateFormatter()
+    let floatFormatter = NSNumberFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +24,8 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         self.recipeTitleTextField.text = self.recipe.title
         self.tableView.estimatedRowHeight = 80
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        dateFormatter.dateStyle = .MediumStyle
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -73,7 +77,7 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
             let ingredient = recipe.ingredients[indexPath.row]
             let cell: IngredientCell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
 
-            cell.quantityTextField.text = ingredient.quantity.description
+            cell.quantityTextField.text = floatFormatter.stringFromNumber(ingredient.quantity)
             cell.quantityTextField.tag = (indexPath.row * 10) + 1
             cell.quantityTextField.keyboardType = .DecimalPad
             cell.quantityTextField.delegate = self
@@ -159,8 +163,7 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         if textField.tag < 1000 {
             let ingredient = self.recipe.ingredients[textField.tag / 10]
             if textField.tag % 10 == 1 {
-                let nf = NSNumberFormatter()
-                ingredient.quantity = nf.numberFromString(textField.text!) as! Float
+                ingredient.quantity = floatFormatter.numberFromString(textField.text!) as! Float
             }
             else if textField.tag % 10 == 2 {
                 ingredient.measurement = textField.text!
@@ -179,14 +182,13 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
     
     func dateSelected(datePicker:UIDatePicker)
     {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .MediumStyle
         let date = datePicker.date
         myTextField.text = dateFormatter.stringFromDate(date)
     }
     
     @IBAction func addIngredient(sender: AnyObject) {
         //TODO: Add ingredient to backend, reload
+        
     }
     
     @IBAction func addDirection(sender: AnyObject) {
