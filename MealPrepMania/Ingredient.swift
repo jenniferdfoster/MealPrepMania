@@ -9,11 +9,13 @@
 import Foundation
 
 class Ingredient {
+    var id: Int
     var name: String
     var measurement: String
     var quantity: Float
     
-    init(name: String, measurement: String, quantity: Float) {
+    init(id: Int, name: String, measurement: String, quantity: Float) {
+        self.id = id
         self.name = name
         self.measurement = measurement
         self.quantity = quantity

@@ -17,38 +17,38 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let r = Recipe(id: 1, title: "Tasty Cakes")
-        let ing = Ingredient(name: "cake", measurement: "tons", quantity: 3.0)
-        r.ingredients.append(ing)
-        let dir = Direction(id: "1", text: "Make Tasty Cakes")
-        let dir2 = Direction(id: "2", text: "Enjoy Tasty Cakes")
-        r.directions.append(dir)
-        r.directions.append(dir2)
-        
-        let r2 = Recipe(id: 2, title: "Jelly Beans")
-        let ing10 = Ingredient(name: "jelly", measurement: "jar", quantity: 1.0)
-        let ing11 = Ingredient(name: "beans", measurement: "bag", quantity: 2.0)
-        r2.ingredients.append(ing10)
-        r2.ingredients.append(ing11)
-        let dir10 = Direction(id: "1", text: "Take Jelly")
-        let dir11 = Direction(id: "2", text: "Add Beans")
-        let dir12 = Direction(id: "2", text: "Acquire Jelly Beans")
-        let dir13 = Direction(id: "2", text: "Probably also acquire diabetes")
-        r2.directions.append(dir10)
-        r2.directions.append(dir11)
-        r2.directions.append(dir12)
-        r2.directions.append(dir13)
-    
-        for i in r.ingredients {
-            groceryList.append(GroceryListItem(id: 1, name: i.name, measurement: i.measurement, quantity: i.quantity, isPurchased: false))
-        }
-        
-        for i in r2.ingredients {
-            groceryList.append(GroceryListItem(id: 2, name: i.name, measurement: i.measurement, quantity: i.quantity, isPurchased: false))
-        }
-        
-        self.tableView.reloadData()
-        
+//        let r = Recipe(id: 1, title: "Tasty Cakes")
+//        let ing = Ingredient(name: "cake", measurement: "tons", quantity: 3.0)
+//        r.ingredients.append(ing)
+//        let dir = Direction(id: "1", text: "Make Tasty Cakes")
+//        let dir2 = Direction(id: "2", text: "Enjoy Tasty Cakes")
+//        r.directions.append(dir)
+//        r.directions.append(dir2)
+//        
+//        let r2 = Recipe(id: 2, title: "Jelly Beans")
+//        let ing10 = Ingredient(name: "jelly", measurement: "jar", quantity: 1.0)
+//        let ing11 = Ingredient(name: "beans", measurement: "bag", quantity: 2.0)
+//        r2.ingredients.append(ing10)
+//        r2.ingredients.append(ing11)
+//        let dir10 = Direction(id: "1", text: "Take Jelly")
+//        let dir11 = Direction(id: "2", text: "Add Beans")
+//        let dir12 = Direction(id: "2", text: "Acquire Jelly Beans")
+//        let dir13 = Direction(id: "2", text: "Probably also acquire diabetes")
+//        r2.directions.append(dir10)
+//        r2.directions.append(dir11)
+//        r2.directions.append(dir12)
+//        r2.directions.append(dir13)
+//    
+//        for i in r.ingredients {
+//            groceryList.append(GroceryListItem(id: 1, name: i.name, measurement: i.measurement, quantity: i.quantity, isPurchased: false))
+//        }
+//        
+//        for i in r2.ingredients {
+//            groceryList.append(GroceryListItem(id: 2, name: i.name, measurement: i.measurement, quantity: i.quantity, isPurchased: false))
+//        }
+//        
+//        self.tableView.reloadData()
+//        
         mealPrepManiaAPI.fetchGroceryList{
             (allGroceryListItems)->Void in
             self.groceryList = allGroceryListItems
@@ -56,21 +56,7 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return 2
-//    }
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        var numRows = 0
-//        for gi in groceryList {
-//            if section == 0 && !gi.isPurchased {
-//                numRows += 1
-//            }
-//            if section == 1 && gi.isPurchased {
-//                numRows += 1
-//            }
-//        }
-//        return numRows
         return groceryList.count
     }
     
@@ -105,17 +91,15 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let groceryItem = self.groceryList[indexPath.row]
-            print("Delete \(groceryItem.name)")
             self.mealPrepManiaAPI.deleteGroceryItem(groceryItem.id)
             self.groceryList.removeAtIndex(indexPath.row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            self.tableView.reloadData()
+            //self.tableView.reloadData()
         }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let groceryItem = self.groceryList[indexPath.row]
-        //groceryItem.isPurchased = !groceryItem.isPurchased
         mealPrepManiaAPI.updateGroceryListItem(groceryItem.id, name: groceryItem.name, quantity: groceryItem.quantity, measurement: groceryItem.measurement, isPurchased: !groceryItem.isPurchased) {
                 (updatedItem)->Void in
                 groceryItem.isPurchased = updatedItem.isPurchased

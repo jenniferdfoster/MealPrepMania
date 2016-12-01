@@ -9,10 +9,10 @@
 import Foundation
 
 class Direction {
-    var id: String
+    var id: Int
     var text: String
     
-    init(id: String, text: String) {
+    init(id: Int, text: String) {
         self.id = id
         self.text = text
     }

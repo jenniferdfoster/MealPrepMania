@@ -17,7 +17,6 @@ class MealPrepManiaAPI {
         return NSURLSession(configuration: config)
     }()
     
-    
     //Recipes API
     func fetchAllRecipes(completion completion: ([Recipe]) -> Void) {
         let url = NSURL(string: "\(baseURLString)/recipes/")!
@@ -51,8 +50,25 @@ class MealPrepManiaAPI {
             
             var recipes = [Recipe]()
             for recipeDictionary in jsonDictionary {
-                recipes.append(Recipe(id: (recipeDictionary["id"] as? Int)!,
-                                        title: (recipeDictionary["title"] as? String)!))
+                let recipe = Recipe(id: (recipeDictionary["id"] as? Int)!,
+                                   title: (recipeDictionary["title"] as? String)!)
+                let ingredientsDict = recipeDictionary["ingredients"] as? [[NSObject:AnyObject]]
+                for ingredient in ingredientsDict! {
+                    let i = Ingredient(id: (ingredient["id"] as? Int)!,
+                                       name: (ingredient["name"] as? String)!,
+                                       measurement: (ingredient["name"] as? String)!,
+                                       quantity: (ingredient["quantity"] as? Float)!)
+                    recipe.ingredients.append(i)
+                }
+                let directionsDict = recipeDictionary["directions"] as? [[NSObject: AnyObject]]
+                for direction in directionsDict! {
+                    let d = Direction(id: (direction["id"] as? Int)!,
+                                      text: (direction["text"] as? String)!)
+                    recipe.directions.append(d)
+                }
+
+                
+                recipes.append(recipe)
             }
             print(recipes)
             return recipes
@@ -71,7 +87,7 @@ class MealPrepManiaAPI {
             let task = session.dataTaskWithRequest(request) {
                 (data, response, error) -> Void in
                 
-                if let recipe = self.processAddRecipeRequest(data: data, error: error) {
+                if let recipe = self.processUpdateRecipeRequest(data: data, error: error) {
                     completion(recipe)
                 }
             }
@@ -79,7 +95,32 @@ class MealPrepManiaAPI {
         }
     }
     
-    func processAddRecipeRequest(data data: NSData?, error: NSError?) -> Recipe? {
+    func updateRecipe(id: Int, title: String, ingredients: [Ingredient], directions: [Direction], completion: (Recipe) -> Void) {
+        let url = NSURL(string: "\(baseURLString)/recipes/\(id)")!
+        let jsonDict = ["title": title,
+                        "ingredients": ingredients,
+                        "directions": directions]
+        
+        do {
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: .PrettyPrinted)
+            let request = NSMutableURLRequest(URL: url)
+            request.HTTPMethod = "POST"
+            request.HTTPBody = jsonData
+            let task = session.dataTaskWithRequest(request) {
+                (data, response, error) -> Void in
+                
+                if let recipe = self.processUpdateRecipeRequest(data: data, error: error) {
+                    completion(recipe)
+                }
+            }
+            task.resume()
+        }
+        catch let error {
+            print(error)
+        }
+    }
+    
+    func processUpdateRecipeRequest(data data: NSData?, error: NSError?) -> Recipe? {
         guard let jsonData = data else {
             return nil
         }
@@ -157,23 +198,46 @@ class MealPrepManiaAPI {
         }
     }
 
+    func addGroceryListItem(completion: (GroceryListItem) -> Void) {
+        let url = NSURL(string: "\(baseURLString)/groceryList/")!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        let task = session.dataTaskWithRequest(request) {
+            (data, response, error) -> Void in
+            
+            //was process Add
+            if let item = self.processUpdateGroceryListRequest(data: data, error: error) {
+                completion(item)
+            }
+        }
+        task.resume()
+    }
     
     func updateGroceryListItem(id: Int, name: String, quantity: Float, measurement: String, isPurchased: Bool, completion: (GroceryListItem) -> Void) {
-        if let newName = name.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()),
-            newMeasurement = measurement.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()),
-            newQuantity = quantity.description.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()){
-            let url = NSURL(string: "\(baseURLString)/groceryList/?id=\(id)&name=\(newName)&measurement=\(newMeasurement)&quantity=\(newQuantity)&isPurchased=\(isPurchased)")!
-            print(url)
+        let url = NSURL(string: "\(baseURLString)/groceryList/\(id)")!
+        print(name)
+        print(isPurchased)
+        let jsonDict = ["name": name,
+                        "measurement": measurement,
+                        "quantity": quantity,
+                        "isPurchased": isPurchased]
+          
+        do {
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: .PrettyPrinted)
             let request = NSMutableURLRequest(URL: url)
             request.HTTPMethod = "POST"
+            request.HTTPBody = jsonData
             let task = session.dataTaskWithRequest(request) {
                 (data, response, error) -> Void in
-                
-                if let list = self.processUpdateGroceryListRequest(data: data, error: error) {
-                    completion(list)
+            
+                if let item = self.processUpdateGroceryListRequest(data: data, error: error) {
+                    completion(item)
                 }
             }
             task.resume()
+        }
+        catch let error {
+            print(error)
         }
     }
     
@@ -205,31 +269,14 @@ class MealPrepManiaAPI {
             return nil
         }
     }
-
-    func addGroceryListItem(completion: (GroceryListItem) -> Void) {
-        //let url = NSURL(string: "\(baseURLString)/groceryList/?name=\(newName)")!
-        let url = NSURL(string: "\(baseURLString)/groceryList/")!
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
-        let task = session.dataTaskWithRequest(request) {
-            (data, response, error) -> Void in
-            
-            if let item = self.processAddGroceryListItemRequest(data: data, error: error) {
-                completion(item)
-            }
-        }
-        task.resume()
-    }
     
     func processAddGroceryListItemRequest(data data: NSData?, error: NSError?) -> GroceryListItem? {
         guard let jsonData = data else {
             return nil
         }
         do {
-            
-            let feedStr = String.init(data: jsonData, encoding: NSUTF8StringEncoding)
-            print(feedStr?.characters)
-
+//            let feedStr = String.init(data: jsonData, encoding: NSUTF8StringEncoding)
+//            print(feedStr?.characters)
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
             
             guard let
@@ -265,6 +312,134 @@ class MealPrepManiaAPI {
     }
     
     // Menu Items API
+    func fetchMenu(completion completion: ([MenuItem]) -> Void) {
+        let url = NSURL(string: "\(baseURLString)/menu/")!
+        let request = NSURLRequest(URL: url)
+        let task = session.dataTaskWithRequest(request) {
+            (data, response, error) -> Void in
+            
+            if let list = self.processMenuRequest(data: data, error: error) {
+                completion(list)
+            }
+        }
+        task.resume()
+    }
+    
+    func processMenuRequest(data data: NSData?, error: NSError?) -> [MenuItem]? {
+        guard let jsonData = data else {
+            return nil
+        }
+        do {
+            let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
+            guard let
+                jsonDictionary = jsonObject as? [[NSObject:AnyObject]]
+                else {
+                    return nil
+            }
+            
+            var list = [MenuItem]()
+            for listDictionary in jsonDictionary {
+                let recipeDict = listDictionary["recipe"] as! [NSObject: AnyObject]
+                let r = Recipe(id: (recipeDict["id"] as? Int)!,
+                           title: (recipeDict["title"] as? String)!)
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateStyle = .MediumStyle
+                let date = dateFormatter.dateFromString((listDictionary["date"] as? String)!)
+                list.append(MenuItem(id: (listDictionary["id"] as? Int)!, recipe: r, date: date!))
+            }
+            return list
+        }
+        catch let error {
+            print(error)
+            return nil
+        }
+    }
+    
+    func addMenuItem(completion: (MenuItem) -> Void) {
+        let url = NSURL(string: "\(baseURLString)/menu/")!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        let task = session.dataTaskWithRequest(request) {
+            (data, response, error) -> Void in
+            
+            if let item = self.processUpdateMenuRequest(data: data, error: error) {
+                completion(item)
+            }
+        }
+        task.resume()
+    }
+    
+    func updateMenuItem(id: Int, recipe: Recipe, date: NSDate, completion: (MenuItem) -> Void) {
+        do {
+            let url = NSURL(string: "\(baseURLString)/menu/\(id)")!
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = .MediumStyle
+            let jsonDict = ["date": dateFormatter.stringFromDate(date),
+                            "recipe": recipe.id]
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: .PrettyPrinted)
+            let request = NSMutableURLRequest(URL: url)
+            request.HTTPMethod = "POST"
+            request.HTTPBody = jsonData
+            let task = session.dataTaskWithRequest(request) {
+                (data, response, error) -> Void in
+                
+                if let item = self.processUpdateMenuRequest(data: data, error: error) {
+                    completion(item)
+                }
+            }
+            task.resume()
+        }
+        catch let error {
+            print(error)
+        }
+    }
+    
+    func processUpdateMenuRequest(data data: NSData?, error: NSError?) -> MenuItem? {
+        guard let jsonData = data else {
+            return nil
+        }
+        do {
+            
+            let feedStr = String.init(data: jsonData, encoding: NSUTF8StringEncoding)
+            print(feedStr?.characters)
+            let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
+            
+            guard let
+                jsonDictionary = jsonObject as? [NSObject:AnyObject]
+                else {
+                    return nil
+            }
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = .MediumStyle
+            let recipeDictionary = jsonDictionary["recipe"] as? [NSObject: AnyObject]
+            let recipe = Recipe(id: (recipeDictionary!["id"] as? Int)!,
+                                          title: (recipeDictionary!["title"] as? String)!)
+            let ingredientsDict = recipeDictionary!["ingredients"] as? [[NSObject:AnyObject]]
+            for ingredient in ingredientsDict! {
+                let i = Ingredient(id: (ingredient["id"] as? Int)!,
+                                   name: (ingredient["name"] as? String)!,
+                                   measurement: (ingredient["name"] as? String)!,
+                                   quantity: (ingredient["quantity"] as? Float)!)
+                recipe.ingredients.append(i)
+            }
+            let directionsDict = recipeDictionary!["directions"] as? [[NSObject: AnyObject]]
+            for direction in directionsDict! {
+                let d = Direction(id: (direction["id"] as? Int)!,
+                                  text: (direction["text"] as? String)!)
+                recipe.directions.append(d)
+            }
+
+            let item = MenuItem(id: (jsonDictionary["id"] as? Int)!,
+                                recipe: recipe,
+                                date: dateFormatter.dateFromString((jsonDictionary["date"] as? String)!)!)
+            return item
+        }
+        catch let error {
+            print(error)
+            return nil
+        }
+    }
+
     func deleteMenuItem(id: Int) {
         let url = NSURL(string: "\(baseURLString)/menu/\(id)")!
         let request = NSMutableURLRequest(URL: url)
