@@ -81,7 +81,6 @@ class MenuTableViewController: UITableViewController {
                 (updatedItem)->Void in
                 dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
             }
-            print("Updated Menu Item to \(menuItem.date)")
             self.sortMenu()
             self.tableView.reloadData()
         }))

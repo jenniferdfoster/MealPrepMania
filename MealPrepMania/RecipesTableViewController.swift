@@ -41,8 +41,11 @@ class RecipesTableViewController: UITableViewController {
         mealPrepManiaAPI.addRecipe {
             (newRecipe)->Void in
             self.recipes.append(newRecipe)
-            dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
-            self.tableView.selectRowAtIndexPath(NSIndexPath.init(forRow: self.recipes.count - 1, inSection: 0), animated: true, scrollPosition: .Bottom)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+                self.tableView.selectRowAtIndexPath(NSIndexPath.init(forRow: self.recipes.count - 1, inSection: 0), animated: true, scrollPosition: .Bottom)
+                self.performSegueWithIdentifier("ShowRecipe", sender: self)
+            })
         }
     }
     

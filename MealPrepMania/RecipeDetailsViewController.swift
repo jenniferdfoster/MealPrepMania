@@ -138,13 +138,9 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: {
             alert -> Void in
             // Add recipe to menu on specified date
-            //let mi = MenuItem(id: 3, recipe: self.recipe, date: datePicker.date)
             self.mealPrepManiaAPI.addMenuItem(self.recipe, date: datePicker.date) { _ in }
-            //print("Created Menu Item on \(mi.date)")
             // Add ingredients to grocery list
             for ingredient in self.recipe.ingredients {
-                //let gi = GroceryListItem(id:4, name: ingredient.name, measurement: ingredient.measurement, quantity: ingredient.quantity, isPurchased: false)
-                //print ("Added grocery list item \(gi.name)")
                 self.mealPrepManiaAPI.addGroceryListItem(ingredient.name, quantity: ingredient.quantity, measurement: ingredient.measurement) { _ in }
             }
         }))
@@ -185,7 +181,7 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func updateRecipe(){
-        self.mealPrepManiaAPI.updateRecipe(recipe){//self.recipe.id, title: self.recipe.title, ingredients: self.recipe.ingredients, directions: self.recipe.directions) {
+        self.mealPrepManiaAPI.updateRecipe(recipe){
             (recipe)->Void in
             self.recipe = recipe
             dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
