@@ -83,7 +83,7 @@
                             <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Recipe Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XfP-Vg-3Dl">
+                                <textField opaque="NO" clipsSubviews="YES" tag="-1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Recipe Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XfP-Vg-3Dl">
                                     <rect key="frame" x="252" y="7" width="97" height="30"/>
                                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="18"/>
                                     <textInputTraits key="textInputTraits"/>

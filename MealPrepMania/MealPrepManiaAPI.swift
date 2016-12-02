@@ -59,30 +59,10 @@ class MealPrepManiaAPI {
         }
     }
     
-    func recipeFromDict(recipeDictionary: NSDictionary) -> Recipe {
-        let recipe = Recipe(id: (recipeDictionary["id"] as? Int)!,
-                            title: (recipeDictionary["title"] as? String)!)
-        let ingredientsDict = recipeDictionary["ingredients"] as? [[NSObject:AnyObject]]
-        for ingredient in ingredientsDict! {
-            let i = Ingredient(id: (ingredient["id"] as? Int)!,
-                               name: (ingredient["name"] as? String)!,
-                               measurement: (ingredient["measurement"] as? String)!,
-                               quantity: (ingredient["quantity"] as? Float)!)
-            recipe.ingredients.append(i)
-        }
-        let directionsDict = recipeDictionary["directions"] as? [[NSObject: AnyObject]]
-        for direction in directionsDict! {
-            let d = Direction(id: (direction["id"] as? Int)!,
-                              text: (direction["text"] as? String)!)
-            recipe.directions.append(d)
-        }
-        return recipe
-    }
-    
     func addRecipe(completion: (Recipe) -> Void) {
         let url = NSURL(string: "\(baseURLString)/recipes/")!
         let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "PUT"
+        request.HTTPMethod = "POST"
         let task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
@@ -93,14 +73,11 @@ class MealPrepManiaAPI {
         task.resume()
     }
     
-    func updateRecipe(id: Int, title: String, ingredients: [Ingredient], directions: [Direction], completion: (Recipe) -> Void) {
-        let url = NSURL(string: "\(baseURLString)/recipes/\(id)")!
-        let jsonDict = ["title": title,
-                        "ingredients": ingredients,
-                        "directions": directions]
-        
+    func updateRecipe(recipe: Recipe, completion: (Recipe) -> Void) {
+        let url = NSURL(string: "\(baseURLString)/recipes/\(recipe.id)")!
+        let jsonDict = recipeToDict(recipe)
         do {
-            let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: .PrettyPrinted)
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: [])
             let request = NSMutableURLRequest(URL: url)
             request.HTTPMethod = "POST"
             request.HTTPBody = jsonData
@@ -378,8 +355,11 @@ class MealPrepManiaAPI {
         do {
             let url = NSURL(string: "\(baseURLString)/menu/\(id)")!
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            let recipesArr = NSMutableArray()
+            //recipesArr.addObject(recipe.id)
+            recipesArr.addObject(recipeToDict(recipe))
             let jsonDict = ["date": dateFormatter.stringFromDate(date),
-                            "recipe": recipe]
+                            "recipe": recipesArr]
             let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: [])
             let request = NSMutableURLRequest(URL: url)
             request.HTTPMethod = "POST"
@@ -442,4 +422,51 @@ class MealPrepManiaAPI {
         }
         task.resume()
     }
+    
+    // Helpers
+    func recipeToDict(recipe: Recipe) -> NSDictionary {
+        let ingredientsList = NSMutableArray()
+        for ingredient in recipe.ingredients {
+            let ingredientsDict = NSMutableDictionary()
+            ingredientsDict["id"] = ingredient.id
+            ingredientsDict["name"] = ingredient.name
+            ingredientsDict["measurement"] = ingredient.measurement
+            ingredientsDict["quantity"] = ingredient.quantity
+            ingredientsList.addObject(ingredientsDict)
+        }
+        let directionsList = NSMutableArray()
+        for direction in recipe.directions {
+            let directionsDict = NSMutableDictionary()
+            directionsDict["id"] = direction.id
+            directionsDict["text"] = direction.text
+            directionsList.addObject(directionsDict)
+        }
+        
+        let jsonDict = ["id": recipe.id,
+                        "title": recipe.title,
+                        "ingredients": ingredientsList,
+                        "directions": directionsList]
+        return jsonDict
+    }
+    
+    func recipeFromDict(recipeDictionary: NSDictionary) -> Recipe {
+        let recipe = Recipe(id: (recipeDictionary["id"] as? Int)!,
+                            title: (recipeDictionary["title"] as? String)!)
+        let ingredientsDict = recipeDictionary["ingredients"] as? [[NSObject:AnyObject]]
+        for ingredient in ingredientsDict! {
+            let i = Ingredient(id: (ingredient["id"] as? Int)!,
+                               name: (ingredient["name"] as? String)!,
+                               measurement: (ingredient["measurement"] as? String)!,
+                               quantity: (ingredient["quantity"] as? Float)!)
+            recipe.ingredients.append(i)
+        }
+        let directionsDict = recipeDictionary["directions"] as? [[NSObject: AnyObject]]
+        for direction in directionsDict! {
+            let d = Direction(id: (direction["id"] as? Int)!,
+                              text: (direction["text"] as? String)!)
+            recipe.directions.append(d)
+        }
+        return recipe
+    }
+
 }

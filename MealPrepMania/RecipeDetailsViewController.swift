@@ -22,6 +22,7 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.title = "Edit Recipe"
         self.recipeTitleTextField.text = self.recipe.title
+        self.recipeTitleTextField.delegate = self
         self.tableView.estimatedRowHeight = 80
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -154,6 +155,7 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func deleteRecipe(sender: AnyObject) {
         mealPrepManiaAPI.deleteRecipe(self.recipe.id)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
@@ -162,7 +164,7 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
             self.recipe.title = textField.text!
         }
         // Ingredients
-        if textField.tag < 1000 {
+        else if textField.tag < 1000 {
             let ingredient = self.recipe.ingredients[textField.tag / 10]
             if textField.tag % 10 == 1 {
                 ingredient.quantity = floatFormatter.numberFromString(textField.text!) as! Float
@@ -183,7 +185,7 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func updateRecipe(){
-        self.mealPrepManiaAPI.updateRecipe(self.recipe.id, title: self.recipe.title, ingredients: self.recipe.ingredients, directions: self.recipe.directions) {
+        self.mealPrepManiaAPI.updateRecipe(recipe){//self.recipe.id, title: self.recipe.title, ingredients: self.recipe.ingredients, directions: self.recipe.directions) {
             (recipe)->Void in
             self.recipe = recipe
             dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
@@ -196,11 +198,15 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func addIngredient(sender: AnyObject) {
-        //TODO: Add ingredient to backend, reload
+        let i = Ingredient(id: 1, name: "", measurement: "cups", quantity: 1.0)
+        self.recipe.ingredients.append(i)
+        self.tableView.reloadData()
     }
     
     @IBAction func addDirection(sender: AnyObject) {
-        //TODO: Add direction to backend, reload
+        let d = Direction(id: 1, text: "")
+        self.recipe.directions.append(d)
+        self.tableView.reloadData()
     }
     
 }
