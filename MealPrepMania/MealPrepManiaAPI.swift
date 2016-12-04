@@ -9,8 +9,8 @@
 import Foundation
 
 class MealPrepManiaAPI {
-    private let baseURLString = "https://django-workspace-taylorfoster.c9users.io"
-//    private let baseURLString = "https://thawing-eyrie-74516.herokuapp.com"
+//    private let baseURLString = "https://django-workspace-taylorfoster.c9users.io"
+    private let baseURLString = "https://thawing-eyrie-74516.herokuapp.com"
     let dateFormatter = NSDateFormatter()
     
     let session: NSURLSession = {
@@ -37,8 +37,6 @@ class MealPrepManiaAPI {
             return nil
         }
         do {
-//            let feedStr = String.init(data: jsonData, encoding: NSUTF8StringEncoding)
-//            print(feedStr?.characters)
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
             guard let
                 jsonDictionary = jsonObject as? [[NSObject:AnyObject]]
@@ -50,7 +48,6 @@ class MealPrepManiaAPI {
                 let recipe = recipeFromDict(recipeDictionary)
                 recipes.append(recipe)
             }
-//            print(recipes)
             return recipes
         }
         catch let error {
@@ -102,8 +99,6 @@ class MealPrepManiaAPI {
             return nil
         }
         do {
-            let feedStr = String.init(data: jsonData, encoding: NSUTF8StringEncoding)
-            print(feedStr?.characters)
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
             
             guard let
@@ -175,17 +170,15 @@ class MealPrepManiaAPI {
         }
     }
 
-    func addGroceryListItem(name: String = "sugar", quantity: Float = 1.0, measurement: String = "cup", completion: (GroceryListItem) -> Void) {
+    func addGroceryListItem(name: String = "", quantity: Float = 1.0, measurement: String = "", completion: (GroceryListItem) -> Void) {
         let url = NSURL(string: "\(baseURLString)/groceryList/")!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
         let task = session.dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
-            //was process Add
             if let item = self.processUpdateGroceryListRequest(data: data, error: error) {
                 self.updateGroceryListItem(item.id, name: name, quantity: quantity, measurement: measurement, isPurchased: false, completion: completion)
-                //completion(item)
             }
         }
         task.resume()
@@ -193,13 +186,10 @@ class MealPrepManiaAPI {
     
     func updateGroceryListItem(id: Int, name: String, quantity: Float, measurement: String, isPurchased: Bool, completion: (GroceryListItem) -> Void) {
         let url = NSURL(string: "\(baseURLString)/groceryList/\(id)")!
-        print(name)
-        print(isPurchased)
         let jsonDict = ["name": name,
                         "measurement": measurement,
                         "quantity": quantity,
                         "isPurchased": isPurchased]
-        
           
         do {
             let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: [])
@@ -227,9 +217,6 @@ class MealPrepManiaAPI {
             return nil
         }
         do {
-            
-                        let feedStr = String.init(data: jsonData, encoding: NSUTF8StringEncoding)
-                        print(feedStr?.characters)
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
             
             guard let
@@ -256,8 +243,6 @@ class MealPrepManiaAPI {
             return nil
         }
         do {
-//            let feedStr = String.init(data: jsonData, encoding: NSUTF8StringEncoding)
-//            print(feedStr?.characters)
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
             
             guard let
@@ -322,11 +307,12 @@ class MealPrepManiaAPI {
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
             var list = [MenuItem]()
             for listDictionary in jsonDictionary {
-                print(listDictionary)
                 let recipeArray = listDictionary["recipe"] as! [[NSObject: AnyObject]]
-                let r = recipeFromDict(recipeArray[0] as NSDictionary)
-                let date = dateFormatter.dateFromString((listDictionary["date"] as? String)!)
-                list.append(MenuItem(id: (listDictionary["id"] as? Int)!, recipe: r, date: date!))
+                if(recipeArray.count > 0) {
+                    let r = recipeFromDict(recipeArray[0] as NSDictionary)
+                    let date = dateFormatter.dateFromString((listDictionary["date"] as? String)!)
+                    list.append(MenuItem(id: (listDictionary["id"] as? Int)!, recipe: r, date: date!))
+                }
             }
             return list
         }
@@ -337,18 +323,31 @@ class MealPrepManiaAPI {
     }
     
     func addMenuItem(recipe: Recipe, date: NSDate = NSDate(), completion: (MenuItem) -> Void) {
-        let url = NSURL(string: "\(baseURLString)/menu/")!
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
-        let task = session.dataTaskWithRequest(request) {
-            (data, response, error) -> Void in
-            
-            if let item = self.processUpdateMenuRequest(data: data, error: error) {
-                self.updateMenuItem(item.id, recipe: recipe, date: date, completion: completion)
-                //completion(item)
+        do {
+            let url = NSURL(string: "\(baseURLString)/menu/")!
+            let recipesArr = NSMutableArray()
+            recipesArr.addObject(recipeToDict(recipe))
+            let jsonDict = ["date": dateFormatter.stringFromDate(date),
+                            "recipe": recipesArr]
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(jsonDict, options: [])
+            let request = NSMutableURLRequest(URL: url)
+            request.HTTPMethod = "POST"
+            request.HTTPBody = jsonData
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            let task = session.dataTaskWithRequest(request) {
+                (data, response, error) -> Void in
+                
+                if let item = self.processUpdateMenuRequest(data: data, error: error) {
+                    self.updateMenuItem(item.id, recipe: recipe, date: date, completion: completion)
+                    //completion(item)
+                }
             }
+                task.resume()
         }
-        task.resume()
+        catch let error {
+            print(error)
+        }
     }
     
     func updateMenuItem(id: Int, recipe: Recipe, date: NSDate, completion: (MenuItem) -> Void) {
@@ -356,7 +355,6 @@ class MealPrepManiaAPI {
             let url = NSURL(string: "\(baseURLString)/menu/\(id)")!
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
             let recipesArr = NSMutableArray()
-            //recipesArr.addObject(recipe.id)
             recipesArr.addObject(recipeToDict(recipe))
             let jsonDict = ["date": dateFormatter.stringFromDate(date),
                             "recipe": recipesArr]
@@ -385,9 +383,6 @@ class MealPrepManiaAPI {
             return nil
         }
         do {
-            
-            let feedStr = String.init(data: jsonData, encoding: NSUTF8StringEncoding)
-            print(feedStr?.characters)
             let jsonObject: AnyObject = try NSJSONSerialization.JSONObjectWithData(jsonData, options: [])
             
             guard let
@@ -396,12 +391,17 @@ class MealPrepManiaAPI {
                     return nil
             }
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-            let recipeDictionary = jsonDictionary["recipe"] as? [NSObject: AnyObject]
-            let recipe = self.recipeFromDict(recipeDictionary!)
-            let item = MenuItem(id: (jsonDictionary["id"] as? Int)!,
-                                recipe: recipe,
-                                date: dateFormatter.dateFromString((jsonDictionary["date"] as? String)!)!)
-            return item
+            if let recipeDictionary = jsonDictionary["recipe"] as? [NSObject: AnyObject] {
+            let recipe = self.recipeFromDict(recipeDictionary)
+                let item = MenuItem(id: (jsonDictionary["id"] as? Int)!,
+                                    recipe: recipe,
+                                    date: dateFormatter.dateFromString((jsonDictionary["date"] as? String)!)!)
+                
+                return item
+            }
+            else {
+                return nil
+            }
         }
         catch let error {
             print(error)
@@ -423,7 +423,7 @@ class MealPrepManiaAPI {
         task.resume()
     }
     
-    // Helpers
+    // Helper Functions
     func recipeToDict(recipe: Recipe) -> NSDictionary {
         let ingredientsList = NSMutableArray()
         for ingredient in recipe.ingredients {
@@ -455,15 +455,15 @@ class MealPrepManiaAPI {
         let ingredientsDict = recipeDictionary["ingredients"] as? [[NSObject:AnyObject]]
         for ingredient in ingredientsDict! {
             let i = Ingredient(id: (ingredient["id"] as? Int)!,
-                               name: (ingredient["name"] as? String)!,
-                               measurement: (ingredient["measurement"] as? String)!,
-                               quantity: (ingredient["quantity"] as? Float)!)
+                                name: (ingredient["name"] as? String)!,
+                                measurement: (ingredient["measurement"] as? String)!,
+                                quantity: (ingredient["quantity"] as? Float)!)
             recipe.ingredients.append(i)
         }
         let directionsDict = recipeDictionary["directions"] as? [[NSObject: AnyObject]]
         for direction in directionsDict! {
             let d = Direction(id: (direction["id"] as? Int)!,
-                              text: (direction["text"] as? String)!)
+                            text: (direction["text"] as? String)!)
             recipe.directions.append(d)
         }
         return recipe

@@ -18,6 +18,7 @@ class RecipesTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         // Get all Recipes
         mealPrepManiaAPI.fetchAllRecipes{
             (allRecipes)->Void in

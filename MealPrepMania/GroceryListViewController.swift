@@ -22,6 +22,9 @@ class GroceryListViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewWillAppear(animated: Bool) {
         self.loadGroceryList()
+        
+        floatFormatter.allowsFloats = true
+        floatFormatter.maximumFractionDigits = 3
     }
     
     func loadGroceryList() {

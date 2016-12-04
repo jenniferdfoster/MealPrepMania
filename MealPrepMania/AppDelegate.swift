@@ -30,6 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let groceryListViewController = groceryNavController.topViewController as! GroceryListViewController
         groceryListViewController.mealPrepManiaAPI = MealPrepManiaAPI()
         return true
+        
+        // Link to Icons Used
+        //<a href="https://icons8.com/">Icon credits</a>
     }
 
     func applicationWillResignActive(application: UIApplication) {

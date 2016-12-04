@@ -52,7 +52,6 @@ class MenuTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let menuItem = self.menuItems[indexPath.row]
-            print("Delete \(menuItem.recipe.title)")
             mealPrepManiaAPI.deleteMenuItem(menuItem.id)
             self.menuItems.removeAtIndex(indexPath.row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)

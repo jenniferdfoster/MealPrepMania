@@ -27,6 +27,8 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         dateFormatter.dateStyle = .MediumStyle
+        floatFormatter.allowsFloats = true
+        floatFormatter.maximumFractionDigits = 3
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -77,7 +79,6 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
         case 0:
             let ingredient = recipe.ingredients[indexPath.row]
             let cell: IngredientCell = tableView.dequeueReusableCellWithIdentifier("IngredientCell", forIndexPath: indexPath) as! IngredientCell
-
             cell.quantityTextField.text = floatFormatter.stringFromNumber(ingredient.quantity)
             cell.quantityTextField.tag = (indexPath.row * 10) + 1
             cell.quantityTextField.keyboardType = .DecimalPad
@@ -194,7 +195,7 @@ class RecipeDetailsViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func addIngredient(sender: AnyObject) {
-        let i = Ingredient(id: 1, name: "", measurement: "cups", quantity: 1.0)
+        let i = Ingredient(id: 1, name: "", measurement: "", quantity: 1.0)
         self.recipe.ingredients.append(i)
         self.tableView.reloadData()
     }
