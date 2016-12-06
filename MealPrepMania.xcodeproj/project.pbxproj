@@ -8,22 +8,46 @@
 
 /* Begin PBXBuildFile section */
 		CB1622AD1DDAA31A0001D80F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1622AC1DDAA31A0001D80F /* AppDelegate.swift */; };
-		CB1622AF1DDAA31A0001D80F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1622AE1DDAA31A0001D80F /* ViewController.swift */; };
-		CB1622B21DDAA31A0001D80F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB1622B01DDAA31A0001D80F /* Main.storyboard */; };
 		CB1622B51DDAA31A0001D80F /* MealPrepMania.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CB1622B31DDAA31A0001D80F /* MealPrepMania.xcdatamodeld */; };
 		CB1622B71DDAA31A0001D80F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB1622B61DDAA31A0001D80F /* Assets.xcassets */; };
 		CB1622BA1DDAA31A0001D80F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB1622B81DDAA31A0001D80F /* LaunchScreen.storyboard */; };
+		CB3AE4531DEB625900A7A618 /* RecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4521DEB625900A7A618 /* RecipesTableViewController.swift */; };
+		CB3AE4551DEB627200A7A618 /* MealPrepManiaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4541DEB627200A7A618 /* MealPrepManiaAPI.swift */; };
+		CB3AE4571DEB637900A7A618 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4561DEB637900A7A618 /* Recipe.swift */; };
+		CB3AE4591DEB644700A7A618 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4581DEB644700A7A618 /* Direction.swift */; };
+		CB3AE45B1DEB64C100A7A618 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE45A1DEB64C100A7A618 /* Ingredient.swift */; };
+		CB3AE45D1DEB655E00A7A618 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE45C1DEB655E00A7A618 /* MenuItem.swift */; };
+		CB3AE45F1DEB65BB00A7A618 /* GroceryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE45E1DEB65BB00A7A618 /* GroceryListItem.swift */; };
+		CB3AE4621DEB72A200A7A618 /* RecipeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4611DEB72A200A7A618 /* RecipeDetailsViewController.swift */; };
+		CB3AE4681DEB786200A7A618 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB3AE4671DEB786200A7A618 /* Main.storyboard */; };
+		CB3AE46A1DEB7C2A00A7A618 /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE4691DEB7C2A00A7A618 /* IngredientCell.swift */; };
+		CB3AE46C1DEB8BF600A7A618 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE46B1DEB8BF600A7A618 /* MenuTableViewController.swift */; };
+		CB3AE46E1DEB969000A7A618 /* GroceryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3AE46D1DEB969000A7A618 /* GroceryListViewController.swift */; };
+		CB43E9671DED038A007F0430 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB43E9661DED038A007F0430 /* MenuItemCell.swift */; };
+		CB43E9691DED0B8E007F0430 /* DirectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB43E9681DED0B8E007F0430 /* DirectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CB1622A91DDAA31A0001D80F /* MealPrepMania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MealPrepMania.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB1622AC1DDAA31A0001D80F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CB1622AE1DDAA31A0001D80F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CB1622B11DDAA31A0001D80F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CB1622B41DDAA31A0001D80F /* MealPrepMania.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MealPrepMania.xcdatamodel; sourceTree = "<group>"; };
 		CB1622B61DDAA31A0001D80F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB1622B91DDAA31A0001D80F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB1622BB1DDAA31A0001D80F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB3AE4521DEB625900A7A618 /* RecipesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesTableViewController.swift; sourceTree = "<group>"; };
+		CB3AE4541DEB627200A7A618 /* MealPrepManiaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealPrepManiaAPI.swift; sourceTree = "<group>"; };
+		CB3AE4561DEB637900A7A618 /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		CB3AE4581DEB644700A7A618 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		CB3AE45A1DEB64C100A7A618 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		CB3AE45C1DEB655E00A7A618 /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		CB3AE45E1DEB65BB00A7A618 /* GroceryListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListItem.swift; sourceTree = "<group>"; };
+		CB3AE4611DEB72A200A7A618 /* RecipeDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewController.swift; sourceTree = "<group>"; };
+		CB3AE4671DEB786200A7A618 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CB3AE4691DEB7C2A00A7A618 /* IngredientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
+		CB3AE46B1DEB8BF600A7A618 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		CB3AE46D1DEB969000A7A618 /* GroceryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListViewController.swift; sourceTree = "<group>"; };
+		CB43E9661DED038A007F0430 /* MenuItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
+		CB43E9681DED0B8E007F0430 /* DirectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +80,43 @@
 		CB1622AB1DDAA31A0001D80F /* MealPrepMania */ = {
 			isa = PBXGroup;
 			children = (
+				CB3AE4601DEB674D00A7A618 /* Model */,
+				CB43E96A1DED168E007F0430 /* TableViewCells */,
 				CB1622AC1DDAA31A0001D80F /* AppDelegate.swift */,
-				CB1622AE1DDAA31A0001D80F /* ViewController.swift */,
-				CB1622B01DDAA31A0001D80F /* Main.storyboard */,
+				CB3AE4541DEB627200A7A618 /* MealPrepManiaAPI.swift */,
+				CB3AE4671DEB786200A7A618 /* Main.storyboard */,
+				CB3AE4521DEB625900A7A618 /* RecipesTableViewController.swift */,
+				CB3AE4611DEB72A200A7A618 /* RecipeDetailsViewController.swift */,
+				CB3AE46B1DEB8BF600A7A618 /* MenuTableViewController.swift */,
+				CB3AE46D1DEB969000A7A618 /* GroceryListViewController.swift */,
 				CB1622B61DDAA31A0001D80F /* Assets.xcassets */,
 				CB1622B81DDAA31A0001D80F /* LaunchScreen.storyboard */,
 				CB1622BB1DDAA31A0001D80F /* Info.plist */,
 				CB1622B31DDAA31A0001D80F /* MealPrepMania.xcdatamodeld */,
 			);
 			path = MealPrepMania;
+			sourceTree = "<group>";
+		};
+		CB3AE4601DEB674D00A7A618 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CB3AE4561DEB637900A7A618 /* Recipe.swift */,
+				CB3AE45A1DEB64C100A7A618 /* Ingredient.swift */,
+				CB3AE4581DEB644700A7A618 /* Direction.swift */,
+				CB3AE45C1DEB655E00A7A618 /* MenuItem.swift */,
+				CB3AE45E1DEB65BB00A7A618 /* GroceryListItem.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		CB43E96A1DED168E007F0430 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				CB43E9661DED038A007F0430 /* MenuItemCell.swift */,
+				CB3AE4691DEB7C2A00A7A618 /* IngredientCell.swift */,
+				CB43E9681DED0B8E007F0430 /* DirectionCell.swift */,
+			);
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,9 +177,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB3AE4681DEB786200A7A618 /* Main.storyboard in Resources */,
 				CB1622BA1DDAA31A0001D80F /* LaunchScreen.storyboard in Resources */,
 				CB1622B71DDAA31A0001D80F /* Assets.xcassets in Resources */,
-				CB1622B21DDAA31A0001D80F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +190,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB1622AF1DDAA31A0001D80F /* ViewController.swift in Sources */,
 				CB1622AD1DDAA31A0001D80F /* AppDelegate.swift in Sources */,
+				CB3AE4531DEB625900A7A618 /* RecipesTableViewController.swift in Sources */,
+				CB3AE45B1DEB64C100A7A618 /* Ingredient.swift in Sources */,
+				CB43E9691DED0B8E007F0430 /* DirectionCell.swift in Sources */,
+				CB3AE4621DEB72A200A7A618 /* RecipeDetailsViewController.swift in Sources */,
 				CB1622B51DDAA31A0001D80F /* MealPrepMania.xcdatamodeld in Sources */,
+				CB3AE4551DEB627200A7A618 /* MealPrepManiaAPI.swift in Sources */,
+				CB3AE46A1DEB7C2A00A7A618 /* IngredientCell.swift in Sources */,
+				CB3AE45D1DEB655E00A7A618 /* MenuItem.swift in Sources */,
+				CB3AE46C1DEB8BF600A7A618 /* MenuTableViewController.swift in Sources */,
+				CB3AE4571DEB637900A7A618 /* Recipe.swift in Sources */,
+				CB3AE46E1DEB969000A7A618 /* GroceryListViewController.swift in Sources */,
+				CB43E9671DED038A007F0430 /* MenuItemCell.swift in Sources */,
+				CB3AE45F1DEB65BB00A7A618 /* GroceryListItem.swift in Sources */,
+				CB3AE4591DEB644700A7A618 /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CB1622B01DDAA31A0001D80F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CB1622B11DDAA31A0001D80F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CB1622B81DDAA31A0001D80F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,6 +348,7 @@
 				CB1622C01DDAA31A0001D80F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

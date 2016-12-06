@@ -17,7 +17,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let rootViewController = window!.rootViewController as! UITabBarController
+        let recipeNavController = rootViewController.viewControllers![0] as! UINavigationController
+        let recipesViewController = recipeNavController.topViewController as! RecipesTableViewController
+        recipesViewController.mealPrepManiaAPI = MealPrepManiaAPI()
+        
+        let menuNavController = rootViewController.viewControllers![1] as! UINavigationController
+        let menuViewController = menuNavController.topViewController as! MenuTableViewController
+        menuViewController.mealPrepManiaAPI = MealPrepManiaAPI()
+        
+        let groceryNavController = rootViewController.viewControllers![2] as! UINavigationController
+        let groceryListViewController = groceryNavController.topViewController as! GroceryListViewController
+        groceryListViewController.mealPrepManiaAPI = MealPrepManiaAPI()
         return true
+        
+        // Link to Icons Used
+        //<a href="https://icons8.com/">Icon credits</a>
     }
 
     func applicationWillResignActive(application: UIApplication) {
